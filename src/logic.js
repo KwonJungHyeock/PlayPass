@@ -1,4 +1,5 @@
 // Domain logic: distance, sorting, and age-based recommendation.
+import { zoneById, zoneFitBonus } from './regions.js';
 
 // Haversine distance in kilometres between two lat/lng points.
 export function distanceKm(a, b) {
@@ -63,9 +64,17 @@ export const AGE_GROUPS = {
 
 // Personalised curation: score each facility for a given age group and
 // preferred categories, then return the top matches with a reason.
-export function recommend(facilities, { ageGroup, categories = [], origin } = {}) {
-  const group = AGE_GROUPS[ageGroup];
-  const preferred = new Set([...(group ? group.prefers : []), ...categories]);
+// zone: 선택 시 해당 지역 코어의 큐레이션 전략(타깃 페르소나·추천 종목)을 가중.
+export function recommend(facilities, { ageGroup, categories = [], origin, zone } = {}) {
+  const zoneObj = zone ? zoneById(zone) : null;
+  // 존을 고르면 존의 타깃 페르소나를 연령대로 승계(미지정 시)
+  const effectiveAge = ageGroup || (zoneObj ? zoneObj.persona : '');
+  const group = AGE_GROUPS[effectiveAge];
+  const preferred = new Set([
+    ...(group ? group.prefers : []),
+    ...categories,
+    ...(zoneObj ? zoneObj.categories : []),
+  ]);
 
   const scored = facilities.map((f) => {
     let score = 0;
@@ -79,7 +88,17 @@ export function recommend(facilities, { ageGroup, categories = [], origin } = {}
       reasons.push(`${group.label} 인기 종목`);
     }
 
-    if (f.ageGroups.includes(ageGroup)) {
+    // 지역 코어 큐레이션 가중치
+    if (zoneObj) {
+      const zb = zoneFitBonus(f, zoneObj);
+      if (zb > 0) {
+        score += zb;
+        if (f.zone === zoneObj.id) reasons.push(`${zoneObj.label} 추천`);
+        else if (zoneObj.categories.includes(f.category)) reasons.push(`${zoneObj.personaLabel} 맞춤`);
+      }
+    }
+
+    if (f.ageGroups.includes(effectiveAge)) {
       score += 20;
       reasons.push('연령대 맞춤');
     }
@@ -108,7 +127,7 @@ export function recommend(facilities, { ageGroup, categories = [], origin } = {}
       distanceKm: origin ? Number(distanceKm(origin, f).toFixed(2)) : null,
       minPrice: minPrice(f),
       score: Number(score.toFixed(1)),
-      reasons: reasons.slice(0, 2),
+      reasons: [...new Set(reasons)].slice(0, 2),
     };
   });
 
@@ -144,4 +163,27 @@ export function utilisationStats(facility, reservations) {
     byDay,
     bySlot,
   };
+}
+
+// 야놀자식 '마감 임박 특가' — 시설의 유휴 시간대 인벤토리를 모아
+// 할인율이 큰 순으로 노출한다. (인벤토리 yield 관리)
+export function aggregateDeals(facilities, { zone } = {}) {
+  const deals = [];
+  for (const f of facilities) {
+    if (zone && f.zone !== zone) continue;
+    for (const d of f.idleDeals || []) {
+      const discountPct = Math.round((1 - d.dealPrice / d.originalPrice) * 100);
+      deals.push({
+        facilityId: f.id,
+        facilityName: f.name,
+        emoji: f.emoji,
+        category: f.category,
+        zone: f.zone,
+        neighborhood: f.region ? f.region.neighborhood : '',
+        ...d,
+        discountPct,
+      });
+    }
+  }
+  return deals.sort((a, b) => b.discountPct - a.discountPct || a.spotsLeft - b.spotsLeft);
 }

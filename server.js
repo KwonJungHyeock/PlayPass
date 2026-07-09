@@ -95,6 +95,22 @@ async function handleApi(req, res, url) {
         const r = api.getRecommendations(query);
         return sendJson(res, r.status, r.body);
       }
+      if (pathname === '/api/regions') {
+        const r = api.getRegions();
+        return sendJson(res, r.status, r.body);
+      }
+      if (pathname === '/api/deals') {
+        const r = api.getDeals(query);
+        return sendJson(res, r.status, r.body);
+      }
+      if (pathname === '/api/hub') {
+        const r = api.hubList();
+        return sendJson(res, r.status, r.body);
+      }
+      if (parts[1] === 'hub' && parts[2] && parts[3] === 'catalog') {
+        const r = api.hubCatalog(parts[2], query);
+        return sendJson(res, r.status, r.body);
+      }
       if (pathname === '/api/passes') {
         const r = api.listPasses(query);
         return sendJson(res, r.status, r.body);
@@ -126,6 +142,10 @@ async function handleApi(req, res, url) {
       }
       if (parts[1] === 'partner' && parts[2] === 'promotions' && parts[3] && parts[4] === 'toggle') {
         const r = api.togglePromotion(parts[3]);
+        return sendJson(res, r.status, r.body);
+      }
+      if (parts[1] === 'hub' && parts[2] && parts[3]) {
+        const r = api.hubAction(parts[2], parts[3], body);
         return sendJson(res, r.status, r.body);
       }
       if (pathname === '/api/dev/reset') {

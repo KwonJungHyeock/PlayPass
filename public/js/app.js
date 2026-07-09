@@ -6,6 +6,7 @@ const state = {
   q: '',
   origin: null, // {lat,lng}
   ageGroup: '',
+  zone: '', // 선택된 지역 코어 존
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -84,6 +85,7 @@ function facilityCard(f) {
 async function loadFacilities() {
   const params = new URLSearchParams();
   if (state.category !== 'all') params.set('category', state.category);
+  if (state.zone) params.set('zone', state.zone);
   params.set('sort', state.sort);
   if (state.q) params.set('q', state.q);
   if (state.origin) {
@@ -104,13 +106,14 @@ async function loadFacilities() {
 
 async function loadRecommendations() {
   const sec = $('#recoSection');
-  if (!state.ageGroup && state.category === 'all') {
+  if (!state.ageGroup && state.category === 'all' && !state.zone) {
     sec.hidden = true;
     return;
   }
   const params = new URLSearchParams();
   if (state.ageGroup) params.set('ageGroup', state.ageGroup);
   if (state.category !== 'all') params.set('categories', state.category);
+  if (state.zone) params.set('zone', state.zone);
   if (state.origin) {
     params.set('lat', state.origin.lat);
     params.set('lng', state.origin.lng);
@@ -120,10 +123,15 @@ async function loadRecommendations() {
     sec.hidden = true;
     return;
   }
+  const zoneLabel = state.zone ? findZone(state.zone)?.label : null;
   const ageLabel = state.ageGroup
     ? state.meta.ageGroups.find((a) => a.key === state.ageGroup)?.label
     : null;
-  $('#recoTitle').textContent = ageLabel ? `${ageLabel} 맞춤 추천` : '이런 곳은 어때요?';
+  $('#recoTitle').textContent = zoneLabel
+    ? `${zoneLabel} 맞춤 추천`
+    : ageLabel
+      ? `${ageLabel} 맞춤 추천`
+      : '이런 곳은 어때요?';
   $('#recoScroll').innerHTML = recommendations
     .map(
       (f) => `
@@ -139,6 +147,186 @@ async function loadRecommendations() {
   $('#recoScroll')
     .querySelectorAll('.reco-card')
     .forEach((el) => el.addEventListener('click', () => openDetail(el.dataset.id)));
+}
+
+// ---- Zone curation ----
+function findZone(id) {
+  for (const d of state.meta.regions.districts) {
+    const z = d.zones.find((x) => x.id === id);
+    if (z) return z;
+  }
+  return null;
+}
+
+function renderZones() {
+  const el = $('#zoneGroups');
+  el.innerHTML = state.meta.regions.districts
+    .map(
+      (d) => `
+      <div class="zone-district">
+        <div class="dlabel">${d.district}</div>
+        <div class="zone-chips">
+          ${d.zones
+            .map(
+              (z) => `<button class="zone-chip ${state.zone === z.id ? 'active' : ''}" data-zone="${z.id}">
+                <span class="zt">${z.emoji} ${z.label}</span>
+                <span class="zp">${z.tagline}</span>
+              </button>`,
+            )
+            .join('')}
+        </div>
+      </div>`,
+    )
+    .join('');
+  el.querySelectorAll('.zone-chip').forEach((b) =>
+    b.addEventListener('click', () => selectZone(b.dataset.zone)),
+  );
+}
+
+function selectZone(zoneId) {
+  state.zone = state.zone === zoneId ? '' : zoneId; // toggle off if same
+  renderZones();
+  renderZoneBanner();
+  loadDeals();
+  loadFacilities();
+  loadRecommendations();
+}
+
+function renderZoneBanner() {
+  const banner = $('#zoneBanner');
+  if (!state.zone) {
+    banner.hidden = true;
+    return;
+  }
+  const z = findZone(state.zone);
+  const cats = z.categories.map((c) => `<span>${catLabel(c)}</span>`).join('');
+  banner.className = `zone-banner ${z.theme}`;
+  banner.innerHTML = `
+    <div class="zb-emoji">${z.emoji}</div>
+    <div>
+      <div class="zb-title">${z.label} · ${z.personaLabel}</div>
+      <div class="zb-note">${z.tagline}</div>
+      <div class="zb-cats">${cats}</div>
+    </div>
+    <button class="zb-clear" id="clearZone">전체 지역 보기</button>`;
+  banner.hidden = false;
+  $('#clearZone').addEventListener('click', () => selectZone(state.zone));
+}
+
+// ---- 마감 임박 특가 ----
+async function loadDeals() {
+  const sec = $('#dealsSection');
+  const params = new URLSearchParams();
+  if (state.zone) params.set('zone', state.zone);
+  const { deals } = await api('/api/deals?' + params.toString());
+  if (!deals.length) {
+    sec.hidden = true;
+    return;
+  }
+  $('#dealsScroll').innerHTML = deals
+    .map(
+      (d) => `
+      <div class="deal-card" data-id="${d.facilityId}">
+        <span class="dc-badge">${d.discountPct}%↓</span>
+        <div class="dc-emoji">${d.emoji}</div>
+        <div class="dc-name">${d.facilityName}</div>
+        <div class="dc-cls">${d.className} · ${d.day} ${d.time}</div>
+        <div class="dc-price">${won(d.dealPrice)} <s>${won(d.originalPrice)}</s></div>
+        <div class="dc-left">⏱ 잔여 ${d.spotsLeft}자리</div>
+      </div>`,
+    )
+    .join('');
+  sec.hidden = false;
+  $('#dealsScroll')
+    .querySelectorAll('.deal-card')
+    .forEach((el) => el.addEventListener('click', () => openDetail(el.dataset.id)));
+}
+
+// ---- 플레이패스 허브 (플러그인) ----
+async function loadHub() {
+  const { plugins } = await api('/api/hub');
+  $('#hubGrid').innerHTML = plugins
+    .map(
+      (p) => `
+      <div class="hub-card ${p.status}" data-id="${p.id}" data-status="${p.status}">
+        <span class="hc-kind ${p.status}">${p.status === 'active' ? '이용 가능' : '오픈 예정'}</span>
+        <div class="hc-icon">${p.icon}</div>
+        <div class="hc-name">${p.name}</div>
+        <div class="hc-sum">${p.summary}</div>
+      </div>`,
+    )
+    .join('');
+  $('#hubGrid')
+    .querySelectorAll('.hub-card')
+    .forEach((el) =>
+      el.addEventListener('click', () => {
+        if (el.dataset.status === 'active') openHub(el.dataset.id);
+        else toast('🚧 곧 만나요! 오픈 예정 서비스입니다.');
+      }),
+    );
+}
+
+async function openHub(pluginId) {
+  const params = new URLSearchParams();
+  if (state.zone) params.set('zone', state.zone);
+  const { plugin, items } = await api(`/api/hub/${pluginId}/catalog?` + params.toString());
+  const action = { oneday: 'book', crew: 'join', rental: 'rent' }[pluginId];
+  const btnLabel = { oneday: '예약', crew: '가입', rental: '대여' }[pluginId] || '신청';
+
+  const rows = items.length
+    ? items
+        .map((it) => {
+          const meta =
+            pluginId === 'oneday'
+              ? `${it.host} · ${it.when} · 잔여 ${it.spotsLeft}`
+              : pluginId === 'crew'
+                ? `${it.neighborhood} · 멤버 ${it.members}명 · ${it.level} · ${it.meetup}`
+                : `${won(it.pricePerDay)}/일 · 보증금 ${won(it.deposit)} · 재고 ${it.stock}`;
+          const price =
+            pluginId === 'oneday' ? (it.price ? won(it.price) : '무료') : '';
+          return `
+          <div class="hub-item">
+            <div>
+              <div class="hi-title">${it.title} ${price ? `<small style="color:var(--brand);font-weight:700">${price}</small>` : ''}</div>
+              <div class="hi-meta">${meta}</div>
+            </div>
+            <button data-action="${action}" data-item="${it.id}">${btnLabel}</button>
+          </div>`;
+        })
+        .join('')
+    : `<div class="empty">${state.zone ? '이 지역에는 해당 상품이 없어요.' : '준비된 상품이 없어요.'}</div>`;
+
+  $('#modal').innerHTML = `
+    <div class="modal-hero">${plugin.icon}<button class="modal-close" id="closeModal">✕</button></div>
+    <div class="modal-body">
+      <h2>${plugin.name}</h2>
+      <div class="section">${rows}</div>
+    </div>`;
+  $('#modalBackdrop').classList.add('open');
+  $('#closeModal').addEventListener('click', closeDetail);
+  $('#modal')
+    .querySelectorAll('.hub-item button')
+    .forEach((b) =>
+      b.addEventListener('click', () => hubAction(pluginId, b.dataset.action, b.dataset.item)),
+    );
+}
+
+async function hubAction(pluginId, action, itemId) {
+  const userName = prompt('이름을 입력하세요', '게스트') || '게스트';
+  const payload = { itemId, userName };
+  if (pluginId === 'rental') payload.days = Number(prompt('대여 일수', '1')) || 1;
+  const res = await api(`/api/hub/${pluginId}/${action}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (res.error) return toast('⚠ ' + res.error);
+  const msg = {
+    oneday: '✅ 원데이 클래스 예약 완료',
+    crew: '✅ 크루 가입 완료',
+    rental: `✅ 대여 신청 완료 (${res.order ? won(res.order.total) : ''})`,
+  }[pluginId];
+  toast(msg);
 }
 
 // ---- Detail modal ----
@@ -285,7 +473,15 @@ async function init() {
     ageSel.appendChild(o);
   });
 
+  // 공유 가능한 지역 링크 지원: /?zone=jbnu
+  const urlZone = new URLSearchParams(location.search).get('zone');
+  if (urlZone && findZone(urlZone)) state.zone = urlZone;
+
   renderChips();
+  renderZones();
+  renderZoneBanner();
+  loadDeals();
+  loadHub();
 
   ageSel.addEventListener('change', () => {
     state.ageGroup = ageSel.value;

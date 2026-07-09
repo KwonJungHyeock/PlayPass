@@ -49,7 +49,8 @@ async function loadDashboard(facilityId) {
   const data = await api(`/api/partner/${facilityId}/dashboard`);
   const { facility, reservations, stats, promotions, passes, revenue } = data;
 
-  $('#facilityHint').textContent = `${facility.district} · ${facility.address}`;
+  const region = facility.region || {};
+  $('#facilityHint').textContent = `${region.district || ''} ${region.neighborhood || ''} · ${facility.address}`;
 
   const occPct = Math.round(stats.occupancyRatio * 100);
   $('#statGrid').innerHTML = [

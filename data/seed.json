@@ -2,13 +2,14 @@
   "facilities": [
     {
       "id": "f-climb-01",
-      "name": "클라임업 클라이밍짐 전주점",
+      "name": "클라임업 클라이밍짐 효자점",
       "category": "climbing",
       "emoji": "🧗",
-      "district": "덕진구",
-      "address": "전주시 덕진구 덕진동 1가 전북대 인근",
-      "lat": 35.8461,
-      "lng": 127.1299,
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "효자동" },
+      "zone": "hyoja-newtown",
+      "address": "전주시 완산구 효자동3가 신시가지",
+      "lat": 35.8131,
+      "lng": 127.1071,
       "phone": "063-101-2201",
       "rating": 4.8,
       "reviewCount": 214,
@@ -16,95 +17,130 @@
       "currentOccupancy": 27,
       "ageGroups": ["youth", "3040"],
       "tags": ["볼더링", "리드클라이밍", "초보환영", "샤워시설"],
-      "description": "전북대 인근 대형 실내 클라이밍 센터. 볼더링 존과 15m 리드 벽을 모두 갖춘 전주 최대 규모 시설로, 주 2회 홀드가 리셋됩니다.",
+      "description": "신시가지 대형 실내 클라이밍 센터. 볼더링 존과 15m 리드 벽을 갖춘 트렌디한 공간으로 2030 사이 인기.",
       "priceTable": [
         { "name": "1일 체험권", "period": "1회", "price": 22000, "desc": "장비 대여 포함" },
-        { "name": "정기권 1개월", "period": "월", "price": 139000, "desc": "무제한 이용 + 강습 4회" },
-        { "name": "정기권 3개월", "period": "3개월", "price": 369000, "desc": "월 123,000원 · 락커 무료" }
+        { "name": "정기권 1개월", "period": "월", "price": 139000, "desc": "무제한 + 강습 4회" },
+        { "name": "정기권 3개월", "period": "3개월", "price": 369000, "desc": "월 123,000원" }
       ],
       "instructors": [
-        { "name": "김도현", "specialty": "리드클라이밍", "career": "국체 입상 3회 · 지도경력 6년", "bio": "초보자의 첫 완등을 함께 만듭니다." },
-        { "name": "이서윤", "specialty": "볼더링", "career": "클라이밍 지도자 자격 · 경력 4년", "bio": "밸런스와 무브 중심의 세심한 코칭." }
+        { "name": "김도현", "specialty": "리드클라이밍", "career": "국체 입상 3회 · 지도 6년", "bio": "첫 완등을 함께 만듭니다." }
       ],
       "schedule": [
         { "day": "월", "time": "19:00", "class": "초급 볼더링", "spots": 4 },
-        { "day": "수", "time": "20:00", "class": "리드 입문", "spots": 2 },
         { "day": "토", "time": "11:00", "class": "주말 클래스", "spots": 6 }
+      ],
+      "idleDeals": [
+        { "day": "화", "time": "14:00", "className": "평일 오후 볼더링", "originalPrice": 22000, "dealPrice": 12000, "spotsLeft": 3 }
       ]
     },
     {
-      "id": "f-crossfit-01",
-      "name": "크로스핏 전주 박스",
-      "category": "crossfit",
-      "emoji": "🏋️",
-      "district": "완산구",
-      "address": "전주시 완산구 서신동 중심상가",
-      "lat": 35.8312,
-      "lng": 127.1261,
-      "phone": "063-101-3310",
-      "rating": 4.7,
-      "reviewCount": 168,
-      "capacityMax": 24,
-      "currentOccupancy": 18,
-      "ageGroups": ["youth", "3040"],
-      "tags": ["WOD", "역도", "체지방감량", "그룹수업"],
-      "description": "국제 공인 코치가 운영하는 정통 크로스핏 박스. 매일 바뀌는 WOD와 소규모 그룹 수업으로 안전하게 강도를 관리합니다.",
-      "priceTable": [
-        { "name": "무료 체험 (OT)", "period": "1회", "price": 0, "desc": "기초 동작 평가 포함" },
-        { "name": "월 8회권", "period": "월", "price": 129000, "desc": "주 2회 페이스" },
-        { "name": "무제한 1개월", "period": "월", "price": 189000, "desc": "전 타임 참여 가능" }
-      ],
-      "instructors": [
-        { "name": "박준영", "specialty": "역도·컨디셔닝", "career": "CF-L2 · 선수경력 8년", "bio": "부상 없는 고강도 훈련을 지향합니다." },
-        { "name": "최민지", "specialty": "체형교정", "career": "생활스포츠지도사 2급", "bio": "직장인 맞춤 시간표를 함께 설계해요." }
-      ],
-      "schedule": [
-        { "day": "화", "time": "06:30", "class": "모닝 WOD", "spots": 3 },
-        { "day": "목", "time": "19:30", "class": "이브닝 WOD", "spots": 5 },
-        { "day": "토", "time": "10:00", "class": "파트너 WOD", "spots": 8 }
-      ]
-    },
-    {
-      "id": "f-jiujitsu-01",
+      "id": "f-jiu-01",
       "name": "그래플러 주짓수 아카데미",
       "category": "jiujitsu",
       "emoji": "🥋",
-      "district": "완산구",
-      "address": "전주시 완산구 효자동 2가",
-      "lat": 35.8158,
-      "lng": 127.1131,
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "효자동" },
+      "zone": "hyoja-newtown",
+      "address": "전주시 완산구 효자동2가",
+      "lat": 35.8152,
+      "lng": 127.1101,
       "phone": "063-101-4420",
       "rating": 4.9,
       "reviewCount": 302,
       "capacityMax": 30,
       "currentOccupancy": 12,
       "ageGroups": ["youth", "3040"],
-      "tags": ["기, 노기", "여성부", "키즈반", "호신술"],
-      "description": "블랙벨트 관장이 직접 지도하는 브라질리언 주짓수 도장. 여성부·키즈반이 분리 운영되어 초보자도 부담 없이 시작할 수 있습니다.",
+      "tags": ["기, 노기", "여성부", "호신술"],
+      "description": "블랙벨트 관장이 직접 지도하는 브라질리언 주짓수 도장. 여성부가 분리 운영되어 초보도 부담 없이 시작.",
       "priceTable": [
         { "name": "1일 체험", "period": "1회", "price": 20000, "desc": "도복 대여 포함" },
-        { "name": "일반부 1개월", "period": "월", "price": 149000, "desc": "전 타임 자유 수련" },
-        { "name": "6개월 등록", "period": "6개월", "price": 780000, "desc": "월 130,000원 · 도복 증정" }
+        { "name": "일반부 1개월", "period": "월", "price": 149000, "desc": "전 타임 자유 수련" }
       ],
       "instructors": [
-        { "name": "정우성", "specialty": "가드·서브미션", "career": "IBJJF 블랙벨트 · 지도 10년", "bio": "기본기를 탄탄히, 기술은 정확하게." },
-        { "name": "한지민", "specialty": "여성부·호신", "career": "퍼플벨트 · 여성 지도 전문", "bio": "안전한 매트 환경을 최우선으로." }
+        { "name": "정우성", "specialty": "가드·서브미션", "career": "IBJJF 블랙벨트 · 지도 10년", "bio": "기본기를 탄탄히." }
       ],
       "schedule": [
         { "day": "월", "time": "20:00", "class": "일반부 기", "spots": 6 },
-        { "day": "수", "time": "20:00", "class": "여성부", "spots": 4 },
-        { "day": "금", "time": "19:00", "class": "노기 스파링", "spots": 5 }
-      ]
+        { "day": "수", "time": "20:00", "class": "여성부", "spots": 4 }
+      ],
+      "idleDeals": []
     },
     {
-      "id": "f-aerobic-01",
+      "id": "f-cross-01",
+      "name": "크로스핏 전주 박스",
+      "category": "crossfit",
+      "emoji": "🏋️",
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "효자동" },
+      "zone": "hyoja-newtown",
+      "address": "전주시 완산구 효자동 신시가지",
+      "lat": 35.8141,
+      "lng": 127.1061,
+      "phone": "063-101-3310",
+      "rating": 4.7,
+      "reviewCount": 168,
+      "capacityMax": 24,
+      "currentOccupancy": 18,
+      "ageGroups": ["youth", "3040"],
+      "tags": ["WOD", "역도", "그룹수업"],
+      "description": "국제 공인 코치가 운영하는 정통 크로스핏 박스. 매일 바뀌는 WOD와 소규모 그룹 수업.",
+      "priceTable": [
+        { "name": "무료 체험 (OT)", "period": "1회", "price": 0, "desc": "기초 동작 평가" },
+        { "name": "무제한 1개월", "period": "월", "price": 189000, "desc": "전 타임 참여" }
+      ],
+      "instructors": [
+        { "name": "박준영", "specialty": "역도·컨디셔닝", "career": "CF-L2 · 선수경력 8년", "bio": "부상 없는 고강도." }
+      ],
+      "schedule": [
+        { "day": "화", "time": "06:30", "class": "모닝 WOD", "spots": 3 },
+        { "day": "목", "time": "19:30", "class": "이브닝 WOD", "spots": 5 }
+      ],
+      "idleDeals": []
+    },
+    {
+      "id": "f-pilates-01",
+      "name": "코어밸런스 필라테스 효자점",
+      "category": "pilates",
+      "emoji": "🤸",
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "효자동" },
+      "zone": "hyoja-newtown",
+      "address": "전주시 완산구 효자동3가",
+      "lat": 35.8161,
+      "lng": 127.1091,
+      "phone": "063-101-8810",
+      "rating": 4.8,
+      "reviewCount": 156,
+      "capacityMax": 16,
+      "currentOccupancy": 7,
+      "ageGroups": ["youth", "3040"],
+      "tags": ["기구필라테스", "체형교정", "소도구"],
+      "description": "1:4 소규모 기구 필라테스 스튜디오. 체형 교정과 코어 강화 중심의 프리미엄 수업.",
+      "priceTable": [
+        { "name": "체험 1회", "period": "1회", "price": 30000, "desc": "" },
+        { "name": "그룹 월 8회", "period": "월", "price": 179000, "desc": "" },
+        { "name": "1:1 개인 10회", "period": "10회", "price": 650000, "desc": "개인 지도" }
+      ],
+      "instructors": [
+        { "name": "윤아라", "specialty": "기구필라테스", "career": "국제 필라테스 자격 · 지도 6년", "bio": "몸의 정렬부터 바로잡아요." }
+      ],
+      "schedule": [
+        { "day": "화", "time": "10:00", "class": "모닝 그룹", "spots": 2 },
+        { "day": "목", "time": "20:00", "class": "이브닝 그룹", "spots": 3 }
+      ],
+      "idleDeals": [
+        { "day": "수", "time": "15:00", "className": "평일 낮 그룹특가", "originalPrice": 30000, "dealPrice": 18000, "spotsLeft": 2 }
+      ]
+    },
+
+    {
+      "id": "f-aero-01",
       "name": "리듬 에어로빅 센터",
       "category": "aerobic",
       "emoji": "💃",
-      "district": "덕진구",
-      "address": "전주시 덕진구 인후동 1가",
-      "lat": 35.8361,
-      "lng": 127.1632,
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "서신동" },
+      "zone": "samcheon-seosin",
+      "address": "전주시 완산구 서신동",
+      "lat": 35.8312,
+      "lng": 127.1261,
       "phone": "063-101-5530",
       "rating": 4.6,
       "reviewCount": 141,
@@ -112,62 +148,61 @@
       "currentOccupancy": 22,
       "ageGroups": ["4060", "3040"],
       "tags": ["에어로빅", "다이어트댄스", "실버반", "주간반"],
-      "description": "20년 경력 강사진의 신나는 에어로빅 센터. 오전 주간반이 활성화되어 지역 커뮤니티 중심으로 운영됩니다.",
+      "description": "20년 경력 강사진의 신나는 에어로빅 센터. 오전 주간반 중심의 지역 커뮤니티.",
       "priceTable": [
-        { "name": "체험 수업", "period": "1회", "price": 10000, "desc": "편한 복장이면 OK" },
-        { "name": "주 3회 1개월", "period": "월", "price": 79000, "desc": "오전/오후 선택" },
-        { "name": "자유수강 3개월", "period": "3개월", "price": 210000, "desc": "월 70,000원" }
+        { "name": "체험 수업", "period": "1회", "price": 10000, "desc": "" },
+        { "name": "주 3회 1개월", "period": "월", "price": 79000, "desc": "오전/오후 선택" }
       ],
       "instructors": [
-        { "name": "오혜숙", "specialty": "에어로빅", "career": "생활체육 지도 20년", "bio": "웃으면서 땀 흘리는 시간을 만듭니다." },
-        { "name": "김나연", "specialty": "다이어트댄스", "career": "K-pop 안무 · 지도 5년", "bio": "트렌디한 안무로 즐겁게 운동해요." }
+        { "name": "오혜숙", "specialty": "에어로빅", "career": "생활체육 지도 20년", "bio": "웃으면서 땀 흘려요." }
       ],
       "schedule": [
         { "day": "월", "time": "10:00", "class": "주간 에어로빅", "spots": 10 },
-        { "day": "수", "time": "10:00", "class": "실버 건강반", "spots": 12 },
-        { "day": "금", "time": "19:00", "class": "다이어트 댄스", "spots": 7 }
-      ]
+        { "day": "수", "time": "10:00", "class": "실버 건강반", "spots": 12 }
+      ],
+      "idleDeals": []
     },
     {
-      "id": "f-yoga-01",
-      "name": "하루요가 스튜디오",
-      "category": "yoga",
-      "emoji": "🧘",
-      "district": "완산구",
-      "address": "전주시 완산구 중화산동 2가",
-      "lat": 35.8151,
-      "lng": 127.1258,
-      "phone": "063-101-6640",
-      "rating": 4.8,
-      "reviewCount": 197,
-      "capacityMax": 20,
-      "currentOccupancy": 9,
-      "ageGroups": ["3040", "4060"],
-      "tags": ["하타요가", "빈야사", "명상", "소규모"],
-      "description": "10인 이하 소규모 정원제로 운영되는 프리미엄 요가 스튜디오. 몸과 마음의 균형을 되찾는 힐링 클래스.",
+      "id": "f-dance-01",
+      "name": "해피 스포츠댄스 삼천",
+      "category": "dance",
+      "emoji": "🕺",
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "삼천동" },
+      "zone": "samcheon-seosin",
+      "address": "전주시 완산구 삼천동1가",
+      "lat": 35.7991,
+      "lng": 127.1141,
+      "phone": "063-101-5531",
+      "rating": 4.6,
+      "reviewCount": 96,
+      "capacityMax": 30,
+      "currentOccupancy": 19,
+      "ageGroups": ["4060"],
+      "tags": ["라인댄스", "스포츠댄스", "커뮤니티", "실버환영"],
+      "description": "라인댄스와 스포츠댄스를 함께 배우는 커뮤니티 중심 센터. 4060 세대의 사교와 건강을 동시에.",
       "priceTable": [
-        { "name": "원데이 클래스", "period": "1회", "price": 25000, "desc": "매트 무료 대여" },
-        { "name": "월 8회권", "period": "월", "price": 145000, "desc": "예약제 운영" },
-        { "name": "무제한 1개월", "period": "월", "price": 199000, "desc": "전 클래스 참여" }
+        { "name": "체험 1회", "period": "1회", "price": 8000, "desc": "" },
+        { "name": "월 자유수강", "period": "월", "price": 68000, "desc": "전 반 참여" }
       ],
       "instructors": [
-        { "name": "서예린", "specialty": "빈야사", "career": "RYT-500 · 지도 7년", "bio": "호흡과 움직임의 연결에 집중합니다." }
+        { "name": "천영자", "specialty": "라인댄스", "career": "라인댄스 지도 18년", "bio": "함께 추면 더 즐거워요." }
       ],
       "schedule": [
-        { "day": "화", "time": "07:00", "class": "모닝 플로우", "spots": 3 },
-        { "day": "목", "time": "19:30", "class": "이브닝 릴렉스", "spots": 4 },
-        { "day": "토", "time": "10:30", "class": "주말 명상 요가", "spots": 5 }
-      ]
+        { "day": "월", "time": "14:00", "class": "라인댄스 기초", "spots": 8 },
+        { "day": "수", "time": "14:00", "class": "스포츠댄스", "spots": 9 }
+      ],
+      "idleDeals": []
     },
     {
       "id": "f-swim-01",
-      "name": "아쿠아라이프 수영장",
+      "name": "아쿠아라이프 수영장 서신",
       "category": "swimming",
       "emoji": "🏊",
-      "district": "덕진구",
-      "address": "전주시 덕진구 송천동 2가",
-      "lat": 35.8683,
-      "lng": 127.1351,
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "서신동" },
+      "zone": "samcheon-seosin",
+      "address": "전주시 완산구 서신동",
+      "lat": 35.8331,
+      "lng": 127.1241,
       "phone": "063-101-7750",
       "rating": 4.5,
       "reviewCount": 256,
@@ -175,42 +210,303 @@
       "currentOccupancy": 41,
       "ageGroups": ["4060", "3040", "youth"],
       "tags": ["25m레인", "초급강습", "자유수영", "아쿠아로빅"],
-      "description": "6레인 25m 실내 수영장. 연령별 강습반과 자유수영을 모두 운영하며 아쿠아로빅 프로그램이 인기입니다.",
+      "description": "6레인 25m 실내 수영장. 연령별 강습반과 자유수영을 모두 운영, 아쿠아로빅이 인기.",
       "priceTable": [
         { "name": "자유수영 1회", "period": "1회", "price": 8000, "desc": "" },
-        { "name": "강습 주 3회", "period": "월", "price": 95000, "desc": "초·중·고급 반 편성" },
-        { "name": "자유수영 정기", "period": "월", "price": 65000, "desc": "전 타임 이용" }
+        { "name": "강습 주 3회", "period": "월", "price": 95000, "desc": "초·중·고급반" }
       ],
       "instructors": [
-        { "name": "강태호", "specialty": "자유형·접영", "career": "수영 지도 12년 · 인명구조", "bio": "자세 교정 중심의 강습을 합니다." },
-        { "name": "문소영", "specialty": "아쿠아로빅", "career": "아쿠아 지도자 자격", "bio": "관절에 부담 없는 물속 운동." }
+        { "name": "강태호", "specialty": "자유형·접영", "career": "수영 지도 12년 · 인명구조", "bio": "자세 교정 중심." }
       ],
       "schedule": [
         { "day": "월", "time": "06:00", "class": "새벽 강습", "spots": 8 },
-        { "day": "수", "time": "10:00", "class": "아쿠아로빅", "spots": 10 },
-        { "day": "금", "time": "20:00", "class": "저녁 자유수영", "spots": 20 }
+        { "day": "수", "time": "10:00", "class": "아쿠아로빅", "spots": 10 }
+      ],
+      "idleDeals": [
+        { "day": "목", "time": "13:00", "className": "낮 자유수영 특가", "originalPrice": 8000, "dealPrice": 4000, "spotsLeft": 15 }
+      ]
+    },
+    {
+      "id": "f-golf-01",
+      "name": "그린필드 스크린골프 삼천",
+      "category": "screengolf",
+      "emoji": "⛳",
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "삼천동" },
+      "zone": "samcheon-seosin",
+      "address": "전주시 완산구 삼천동2가",
+      "lat": 35.7972,
+      "lng": 127.1161,
+      "phone": "063-101-9910",
+      "rating": 4.4,
+      "reviewCount": 88,
+      "capacityMax": 16,
+      "currentOccupancy": 9,
+      "ageGroups": ["4060", "3040"],
+      "tags": ["스크린골프", "레슨", "룸예약"],
+      "description": "최신 시뮬레이터를 갖춘 스크린골프. 프로 레슨과 자유 라운딩 룸을 함께 운영합니다.",
+      "priceTable": [
+        { "name": "1시간 룸이용", "period": "1회", "price": 25000, "desc": "최대 4인" },
+        { "name": "레슨 월 8회", "period": "월", "price": 220000, "desc": "프로 지도" }
+      ],
+      "instructors": [
+        { "name": "남기훈", "specialty": "골프 레슨", "career": "KPGA 프로 · 지도 9년", "bio": "스윙 데이터로 교정합니다." }
+      ],
+      "schedule": [
+        { "day": "화", "time": "19:00", "class": "직장인 레슨", "spots": 3 },
+        { "day": "토", "time": "10:00", "class": "주말 라운딩반", "spots": 4 }
+      ],
+      "idleDeals": [
+        { "day": "월", "time": "13:00", "className": "평일 낮 룸 반값", "originalPrice": 25000, "dealPrice": 13000, "spotsLeft": 5 }
+      ]
+    },
+
+    {
+      "id": "f-yoga-01",
+      "name": "하루요가 스튜디오 에코시티",
+      "category": "yoga",
+      "emoji": "🧘",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "송천동" },
+      "zone": "songcheon-eco",
+      "address": "전주시 덕진구 송천동 에코시티",
+      "lat": 35.8761,
+      "lng": 127.1201,
+      "phone": "063-101-6640",
+      "rating": 4.8,
+      "reviewCount": 197,
+      "capacityMax": 20,
+      "currentOccupancy": 9,
+      "ageGroups": ["3040", "4060"],
+      "tags": ["하타요가", "빈야사", "명상", "퇴근후"],
+      "description": "에코시티 젊은 부부 사이 인기 소규모 요가 스튜디오. 퇴근 후 힐링 클래스가 강점.",
+      "priceTable": [
+        { "name": "원데이 클래스", "period": "1회", "price": 25000, "desc": "매트 무료" },
+        { "name": "무제한 1개월", "period": "월", "price": 199000, "desc": "전 클래스" }
+      ],
+      "instructors": [
+        { "name": "서예린", "specialty": "빈야사", "career": "RYT-500 · 지도 7년", "bio": "호흡과 움직임의 연결." }
+      ],
+      "schedule": [
+        { "day": "화", "time": "20:00", "class": "퇴근 후 플로우", "spots": 4 },
+        { "day": "토", "time": "10:30", "class": "주말 명상 요가", "spots": 5 }
+      ],
+      "idleDeals": []
+    },
+    {
+      "id": "f-tennis-01",
+      "name": "에코시티 테니스클럽",
+      "category": "tennis",
+      "emoji": "🎾",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "송천동" },
+      "zone": "songcheon-eco",
+      "address": "전주시 덕진구 송천동 에코시티",
+      "lat": 35.8791,
+      "lng": 127.1161,
+      "phone": "063-101-7720",
+      "rating": 4.7,
+      "reviewCount": 112,
+      "capacityMax": 24,
+      "currentOccupancy": 14,
+      "ageGroups": ["3040", "4060"],
+      "tags": ["실내코트", "성인레슨", "주니어반", "가족"],
+      "description": "실내 하드코트 2면의 테니스클럽. 성인 레슨과 자녀를 위한 주니어반을 함께 운영합니다.",
+      "priceTable": [
+        { "name": "체험 레슨", "period": "1회", "price": 30000, "desc": "라켓 대여" },
+        { "name": "성인 주 2회", "period": "월", "price": 180000, "desc": "" },
+        { "name": "주니어 주 2회", "period": "월", "price": 150000, "desc": "초등 대상" }
+      ],
+      "instructors": [
+        { "name": "조현석", "specialty": "테니스 레슨", "career": "생활체육 지도사 · 경력 8년", "bio": "가족이 함께 즐기는 테니스." }
+      ],
+      "schedule": [
+        { "day": "수", "time": "19:00", "class": "직장인 저녁반", "spots": 3 },
+        { "day": "토", "time": "09:00", "class": "주니어 주말반", "spots": 4 }
+      ],
+      "idleDeals": []
+    },
+    {
+      "id": "f-pilates-02",
+      "name": "코어밸런스 필라테스 혁신도시점",
+      "category": "pilates",
+      "emoji": "🤸",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "만성동" },
+      "zone": "songcheon-eco",
+      "address": "전주시 덕진구 만성동 혁신도시",
+      "lat": 35.8451,
+      "lng": 127.0901,
+      "phone": "063-101-8811",
+      "rating": 4.7,
+      "reviewCount": 103,
+      "capacityMax": 16,
+      "currentOccupancy": 10,
+      "ageGroups": ["3040", "4060"],
+      "tags": ["기구필라테스", "산전산후", "재활"],
+      "description": "혁신도시 직장인·주부 대상 기구 필라테스. 산전산후·재활 프로그램을 세심하게 운영합니다.",
+      "priceTable": [
+        { "name": "체험 1회", "period": "1회", "price": 28000, "desc": "" },
+        { "name": "그룹 월 8회", "period": "월", "price": 169000, "desc": "" }
+      ],
+      "instructors": [
+        { "name": "배정화", "specialty": "재활·산전산후", "career": "필라테스 지도 10년", "bio": "느리고 안전하게." }
+      ],
+      "schedule": [
+        { "day": "월", "time": "10:30", "class": "산후 회복반", "spots": 3 },
+        { "day": "수", "time": "20:00", "class": "직장인 저녁반", "spots": 2 }
+      ],
+      "idleDeals": []
+    },
+    {
+      "id": "f-yoga-02",
+      "name": "선요가 송천힐링점",
+      "category": "yoga",
+      "emoji": "🧘",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "송천동" },
+      "zone": "songcheon-eco",
+      "address": "전주시 덕진구 송천동2가",
+      "lat": 35.8741,
+      "lng": 127.1221,
+      "phone": "063-101-6641",
+      "rating": 4.7,
+      "reviewCount": 118,
+      "capacityMax": 22,
+      "currentOccupancy": 8,
+      "ageGroups": ["4060", "3040"],
+      "tags": ["힐링요가", "실버요가", "주차가능"],
+      "description": "송천동 주택가의 조용한 요가원. 관절 건강과 유연성 중심의 힐링·실버 요가반이 인기.",
+      "priceTable": [
+        { "name": "체험 클래스", "period": "1회", "price": 15000, "desc": "" },
+        { "name": "주 2회 1개월", "period": "월", "price": 99000, "desc": "" }
+      ],
+      "instructors": [
+        { "name": "한소원", "specialty": "실버·힐링요가", "career": "요가 지도 15년", "bio": "오래 함께해요." }
+      ],
+      "schedule": [
+        { "day": "월", "time": "10:30", "class": "실버 요가", "spots": 6 },
+        { "day": "수", "time": "10:30", "class": "힐링 플로우", "spots": 5 }
+      ],
+      "idleDeals": []
+    },
+
+    {
+      "id": "f-fit-01",
+      "name": "파워존 24시 헬스 전북대점",
+      "category": "fitness",
+      "emoji": "💪",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "덕진동" },
+      "zone": "jbnu",
+      "address": "전주시 덕진구 덕진동 전북대 상권",
+      "lat": 35.8471,
+      "lng": 127.1321,
+      "phone": "063-101-2211",
+      "rating": 4.5,
+      "reviewCount": 231,
+      "capacityMax": 80,
+      "currentOccupancy": 52,
+      "ageGroups": ["youth", "3040"],
+      "tags": ["24시간", "가성비", "학생할인", "샤워시설"],
+      "description": "전북대 앞 24시간 헬스장. 학생 가성비 요금과 최신 머신으로 대학생 사이 압도적 인기.",
+      "priceTable": [
+        { "name": "1일 이용권", "period": "1회", "price": 10000, "desc": "" },
+        { "name": "학생 1개월", "period": "월", "price": 45000, "desc": "학생증 지참" },
+        { "name": "3개월 등록", "period": "3개월", "price": 120000, "desc": "월 40,000원" }
+      ],
+      "instructors": [
+        { "name": "장민석", "specialty": "웨이트 코칭", "career": "생활스포츠지도사 2급", "bio": "가성비로 시작하는 근력운동." }
+      ],
+      "schedule": [
+        { "day": "월", "time": "18:00", "class": "초보 웨이트 그룹", "spots": 6 },
+        { "day": "금", "time": "18:00", "class": "루틴 점검", "spots": 5 }
+      ],
+      "idleDeals": [
+        { "day": "화", "time": "22:00", "className": "심야 학생 특가", "originalPrice": 10000, "dealPrice": 3900, "spotsLeft": 20 }
+      ]
+    },
+    {
+      "id": "f-jiu-02",
+      "name": "락커룸 주짓수&복싱 덕진점",
+      "category": "jiujitsu",
+      "emoji": "🥋",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "덕진동" },
+      "zone": "jbnu",
+      "address": "전주시 덕진구 덕진동1가",
+      "lat": 35.8461,
+      "lng": 127.1281,
+      "phone": "063-101-4421",
+      "rating": 4.6,
+      "reviewCount": 133,
+      "capacityMax": 28,
+      "currentOccupancy": 20,
+      "ageGroups": ["youth", "3040"],
+      "tags": ["주짓수", "복싱", "학생환영", "체력단련"],
+      "description": "주짓수와 복싱을 한 곳에서. 대학생 입문반과 스파링반을 단계별로 운영합니다.",
+      "priceTable": [
+        { "name": "체험 1회", "period": "1회", "price": 15000, "desc": "장비 대여" },
+        { "name": "종합 1개월", "period": "월", "price": 129000, "desc": "전 종목 수련" }
+      ],
+      "instructors": [
+        { "name": "고동석", "specialty": "주짓수·복싱", "career": "아마추어 선수 · 지도 7년", "bio": "실전 감각을 안전하게." }
+      ],
+      "schedule": [
+        { "day": "월", "time": "20:30", "class": "주짓수 기본", "spots": 5 },
+        { "day": "수", "time": "20:30", "class": "복싱 컨디셔닝", "spots": 6 }
+      ],
+      "idleDeals": [
+        { "day": "목", "time": "15:00", "className": "낮 타임 체험특가", "originalPrice": 15000, "dealPrice": 7000, "spotsLeft": 4 }
+      ]
+    },
+    {
+      "id": "f-box-01",
+      "name": "파이터스 복싱짐",
+      "category": "boxing",
+      "emoji": "🥊",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "금암동" },
+      "zone": "jbnu",
+      "address": "전주시 덕진구 금암동",
+      "lat": 35.8481,
+      "lng": 127.1311,
+      "phone": "063-101-3320",
+      "rating": 4.6,
+      "reviewCount": 97,
+      "capacityMax": 26,
+      "currentOccupancy": 14,
+      "ageGroups": ["youth", "3040"],
+      "tags": ["복싱", "다이어트복싱", "학생할인"],
+      "description": "전북대 인근 복싱 전문 체육관. 다이어트 복싱부터 선수반까지, 스트레스 해소에 제격.",
+      "priceTable": [
+        { "name": "체험 1회", "period": "1회", "price": 12000, "desc": "글러브 대여" },
+        { "name": "학생 1개월", "period": "월", "price": 89000, "desc": "학생증 지참" }
+      ],
+      "instructors": [
+        { "name": "류성한", "specialty": "복싱", "career": "아마추어 복싱 선수 · 지도 6년", "bio": "땀으로 스트레스를 날려요." }
+      ],
+      "schedule": [
+        { "day": "화", "time": "19:00", "class": "다이어트 복싱", "spots": 5 },
+        { "day": "목", "time": "21:00", "class": "미트 스파링", "spots": 4 }
+      ],
+      "idleDeals": [
+        { "day": "수", "time": "14:00", "className": "평일 낮 원포인트", "originalPrice": 12000, "dealPrice": 6000, "spotsLeft": 6 }
       ]
     },
     {
       "id": "f-climb-02",
-      "name": "볼더링 스팟 평화점",
+      "name": "볼더링 스팟 전북대점",
       "category": "climbing",
       "emoji": "🧗",
-      "district": "완산구",
-      "address": "전주시 완산구 평화동 2가",
-      "lat": 35.7961,
-      "lng": 127.1321,
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "덕진동" },
+      "zone": "jbnu",
+      "address": "전주시 덕진구 덕진동 전북대 인근",
+      "lat": 35.8451,
+      "lng": 127.1331,
       "phone": "063-101-2202",
       "rating": 4.4,
       "reviewCount": 88,
       "capacityMax": 25,
       "currentOccupancy": 6,
       "ageGroups": ["youth", "3040"],
-      "tags": ["볼더링전문", "야간운영", "동네짐"],
-      "description": "평화동 주민을 위한 동네 볼더링 짐. 늦은 밤까지 운영해 퇴근 후 운동하기 좋습니다.",
+      "tags": ["볼더링전문", "야간운영", "학생환영"],
+      "description": "전북대 학생을 위한 볼더링 짐. 늦은 밤까지 운영해 수업 후 운동하기 좋습니다.",
       "priceTable": [
-        { "name": "1일권", "period": "1회", "price": 18000, "desc": "암벽화 대여 3,000원" },
-        { "name": "정기권 1개월", "period": "월", "price": 109000, "desc": "무제한" }
+        { "name": "1일권", "period": "1회", "price": 16000, "desc": "암벽화 대여 3,000원" },
+        { "name": "학생 정기권", "period": "월", "price": 89000, "desc": "무제한 · 학생증" }
       ],
       "instructors": [
         { "name": "임재현", "specialty": "볼더링", "career": "지도경력 3년", "bio": "부담 없이 즐기는 클라이밍." }
@@ -218,173 +514,25 @@
       "schedule": [
         { "day": "화", "time": "21:00", "class": "야간 자유", "spots": 10 },
         { "day": "목", "time": "21:00", "class": "초급 클래스", "spots": 4 }
-      ]
-    },
-    {
-      "id": "f-yoga-02",
-      "name": "선요가 아중점",
-      "category": "yoga",
-      "emoji": "🧘",
-      "district": "덕진구",
-      "address": "전주시 덕진구 우아동 3가 아중리",
-      "lat": 35.8351,
-      "lng": 127.1802,
-      "phone": "063-101-6641",
-      "rating": 4.7,
-      "reviewCount": 112,
-      "capacityMax": 22,
-      "currentOccupancy": 14,
-      "ageGroups": ["4060", "3040"],
-      "tags": ["힐링요가", "실버요가", "주간반", "주차가능"],
-      "description": "아중리 주택가의 조용한 요가원. 관절 건강과 유연성에 초점을 둔 실버 요가반이 특히 인기입니다.",
-      "priceTable": [
-        { "name": "체험 클래스", "period": "1회", "price": 15000, "desc": "" },
-        { "name": "주 2회 1개월", "period": "월", "price": 99000, "desc": "" },
-        { "name": "3개월 등록", "period": "3개월", "price": 270000, "desc": "월 90,000원" }
       ],
-      "instructors": [
-        { "name": "배정화", "specialty": "실버·힐링요가", "career": "요가 지도 15년", "bio": "느리고 안전하게, 오래 함께해요." }
-      ],
-      "schedule": [
-        { "day": "월", "time": "10:30", "class": "실버 요가", "spots": 6 },
-        { "day": "수", "time": "10:30", "class": "힐링 플로우", "spots": 5 }
-      ]
-    },
-    {
-      "id": "f-crossfit-02",
-      "name": "펑셔널 짐 삼천",
-      "category": "crossfit",
-      "emoji": "🏋️",
-      "district": "완산구",
-      "address": "전주시 완산구 삼천동 1가",
-      "lat": 35.7982,
-      "lng": 127.1151,
-      "phone": "063-101-3311",
-      "rating": 4.5,
-      "reviewCount": 74,
-      "capacityMax": 20,
-      "currentOccupancy": 11,
-      "ageGroups": ["3040", "youth"],
-      "tags": ["펑셔널", "PT병행", "소규모", "주차가능"],
-      "description": "기능성 운동과 개인 PT를 병행하는 삼천동 소규모 짐. 체계적인 프로그램으로 초보자 진입장벽을 낮췄습니다.",
-      "priceTable": [
-        { "name": "체험 1회", "period": "1회", "price": 15000, "desc": "" },
-        { "name": "그룹 월 12회", "period": "월", "price": 159000, "desc": "" },
-        { "name": "PT 10회", "period": "10회", "price": 550000, "desc": "1:1 개인 지도" }
-      ],
-      "instructors": [
-        { "name": "송현우", "specialty": "펑셔널·PT", "career": "NSCA-CPT · 경력 6년", "bio": "데이터로 관리하는 맞춤 훈련." }
-      ],
-      "schedule": [
-        { "day": "화", "time": "19:00", "class": "그룹 펑셔널", "spots": 4 },
-        { "day": "목", "time": "19:00", "class": "코어 집중", "spots": 3 }
-      ]
-    },
-    {
-      "id": "f-aerobic-02",
-      "name": "해피 라인댄스 & 에어로빅",
-      "category": "aerobic",
-      "emoji": "💃",
-      "district": "덕진구",
-      "address": "전주시 덕진구 금암동",
-      "lat": 35.8421,
-      "lng": 127.1401,
-      "phone": "063-101-5531",
-      "rating": 4.6,
-      "reviewCount": 96,
-      "capacityMax": 30,
-      "currentOccupancy": 19,
-      "ageGroups": ["4060"],
-      "tags": ["라인댄스", "에어로빅", "커뮤니티", "실버환영"],
-      "description": "라인댄스와 에어로빅을 함께 배우는 커뮤니티 중심 센터. 4060 세대의 사교와 건강을 동시에 챙깁니다.",
-      "priceTable": [
-        { "name": "체험 1회", "period": "1회", "price": 8000, "desc": "" },
-        { "name": "월 자유수강", "period": "월", "price": 68000, "desc": "전 반 참여" }
-      ],
-      "instructors": [
-        { "name": "천영자", "specialty": "라인댄스", "career": "라인댄스 지도 18년", "bio": "함께 추면 더 즐거운 라인댄스." }
-      ],
-      "schedule": [
-        { "day": "월", "time": "14:00", "class": "라인댄스 기초", "spots": 8 },
-        { "day": "수", "time": "14:00", "class": "에어로빅", "spots": 9 },
-        { "day": "금", "time": "14:00", "class": "복습반", "spots": 10 }
-      ]
-    },
-    {
-      "id": "f-jiujitsu-02",
-      "name": "락커룸 MMA & 주짓수",
-      "category": "jiujitsu",
-      "emoji": "🥋",
-      "district": "덕진구",
-      "address": "전주시 덕진구 송천동 1가",
-      "lat": 35.8601,
-      "lng": 127.1291,
-      "phone": "063-101-4421",
-      "rating": 4.6,
-      "reviewCount": 133,
-      "capacityMax": 28,
-      "currentOccupancy": 20,
-      "ageGroups": ["youth", "3040"],
-      "tags": ["MMA", "주짓수", "복싱", "체력단련"],
-      "description": "주짓수와 MMA, 복싱을 한 곳에서. 격투기 입문부터 선수반까지 단계별 프로그램을 제공합니다.",
-      "priceTable": [
-        { "name": "체험 1회", "period": "1회", "price": 20000, "desc": "장비 대여 포함" },
-        { "name": "종합 1개월", "period": "월", "price": 159000, "desc": "전 종목 수련" }
-      ],
-      "instructors": [
-        { "name": "고동석", "specialty": "MMA·주짓수", "career": "아마추어 MMA 선수 · 지도 7년", "bio": "실전 감각을 안전하게 기릅니다." }
-      ],
-      "schedule": [
-        { "day": "월", "time": "20:30", "class": "주짓수 기본", "spots": 5 },
-        { "day": "수", "time": "20:30", "class": "MMA 입문", "spots": 4 },
-        { "day": "금", "time": "20:30", "class": "복싱 컨디셔닝", "spots": 6 }
-      ]
-    },
-    {
-      "id": "f-swim-02",
-      "name": "블루웨이브 아쿠아센터 효자",
-      "category": "swimming",
-      "emoji": "🏊",
-      "district": "완산구",
-      "address": "전주시 완산구 효자동 3가",
-      "lat": 35.8121,
-      "lng": 127.1081,
-      "phone": "063-101-7751",
-      "rating": 4.4,
-      "reviewCount": 178,
-      "capacityMax": 50,
-      "currentOccupancy": 33,
-      "ageGroups": ["youth", "4060", "3040"],
-      "tags": ["유아강습", "초등반", "성인반", "온수풀"],
-      "description": "효자동 신시가지의 온수 실내 수영장. 유아 강습부터 성인 마스터즈반까지 전 연령 프로그램을 운영합니다.",
-      "priceTable": [
-        { "name": "자유수영 1회", "period": "1회", "price": 9000, "desc": "" },
-        { "name": "성인 강습 주 3회", "period": "월", "price": 99000, "desc": "" },
-        { "name": "유아 강습 주 2회", "period": "월", "price": 88000, "desc": "" }
-      ],
-      "instructors": [
-        { "name": "노유진", "specialty": "유아·초등 강습", "career": "유아체육 지도 9년", "bio": "물과 친해지는 것부터 시작해요." }
-      ],
-      "schedule": [
-        { "day": "화", "time": "16:00", "class": "초등 강습", "spots": 6 },
-        { "day": "목", "time": "20:00", "class": "성인 마스터즈", "spots": 8 },
-        { "day": "토", "time": "09:00", "class": "유아 물놀이", "spots": 5 }
+      "idleDeals": [
+        { "day": "금", "time": "16:00", "className": "오후 학생 반값", "originalPrice": 16000, "dealPrice": 8000, "spotsLeft": 8 }
       ]
     }
   ],
   "promotions": [
     {
       "id": "p-001",
-      "facilityId": "f-climb-01",
+      "facilityId": "f-fit-01",
       "type": "timesale",
-      "title": "평일 오후 타임세일",
-      "desc": "평일 14~17시 방문 시 1일 체험권 40% 할인",
-      "discountPct": 40,
+      "title": "신학기 학생 타임세일",
+      "desc": "학생증 지참 시 3개월 등록 25% 할인",
+      "discountPct": 25,
       "active": true
     },
     {
       "id": "p-002",
-      "facilityId": "f-crossfit-01",
+      "facilityId": "f-cross-01",
       "type": "newbie",
       "title": "신규 가입 이벤트",
       "desc": "첫 등록 시 무제한 1개월 20% 할인 + 프로틴 증정",
@@ -393,7 +541,7 @@
     },
     {
       "id": "p-003",
-      "facilityId": "f-jiujitsu-01",
+      "facilityId": "f-jiu-01",
       "type": "newbie",
       "title": "여성부 오픈 특가",
       "desc": "여성부 신규 등록 시 도복 무료 + 첫 달 15% 할인",
@@ -403,9 +551,11 @@
   ],
   "reservations": [
     { "id": "r-001", "facilityId": "f-climb-01", "userName": "김민준", "classDay": "월", "classTime": "19:00", "className": "초급 볼더링", "status": "confirmed", "checkedIn": false },
-    { "id": "r-002", "facilityId": "f-climb-01", "userName": "이수아", "classDay": "수", "classTime": "20:00", "className": "리드 입문", "status": "confirmed", "checkedIn": true },
-    { "id": "r-003", "facilityId": "f-crossfit-01", "userName": "박서준", "classDay": "화", "classTime": "06:30", "className": "모닝 WOD", "status": "confirmed", "checkedIn": true },
-    { "id": "r-004", "facilityId": "f-jiujitsu-01", "userName": "정하윤", "classDay": "수", "classTime": "20:00", "className": "여성부", "status": "confirmed", "checkedIn": false }
+    { "id": "r-002", "facilityId": "f-cross-01", "userName": "이수아", "classDay": "화", "classTime": "06:30", "className": "모닝 WOD", "status": "confirmed", "checkedIn": true },
+    { "id": "r-003", "facilityId": "f-fit-01", "userName": "박서준", "classDay": "월", "classTime": "18:00", "className": "초보 웨이트 그룹", "status": "confirmed", "checkedIn": true },
+    { "id": "r-004", "facilityId": "f-jiu-01", "userName": "정하윤", "classDay": "수", "classTime": "20:00", "className": "여성부", "status": "confirmed", "checkedIn": false }
   ],
-  "passes": []
+  "passes": [],
+  "hubBookings": [],
+  "crewMembers": []
 }

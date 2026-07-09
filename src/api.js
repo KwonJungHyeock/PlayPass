@@ -5,16 +5,25 @@ import {
   recommend,
   utilisationStats,
   minPrice,
+  aggregateDeals,
   AGE_GROUPS,
 } from './logic.js';
+import { regionTree } from './regions.js';
+import { listPlugins, pluginCatalog, runPluginAction } from './plugins/registry.js';
 
 export const CATEGORIES = [
   { key: 'climbing', label: '클라이밍', emoji: '🧗' },
   { key: 'crossfit', label: '크로스핏', emoji: '🏋️' },
   { key: 'jiujitsu', label: '주짓수', emoji: '🥋' },
+  { key: 'boxing', label: '복싱', emoji: '🥊' },
+  { key: 'fitness', label: '헬스', emoji: '💪' },
+  { key: 'pilates', label: '필라테스', emoji: '🤸' },
   { key: 'aerobic', label: '에어로빅', emoji: '💃' },
+  { key: 'dance', label: '스포츠댄스', emoji: '🕺' },
   { key: 'yoga', label: '요가', emoji: '🧘' },
+  { key: 'tennis', label: '테니스', emoji: '🎾' },
   { key: 'swimming', label: '수영', emoji: '🏊' },
+  { key: 'screengolf', label: '스크린골프', emoji: '⛳' },
 ];
 
 const ok = (body) => ({ status: 200, body });
@@ -22,22 +31,32 @@ const created = (body) => ({ status: 201, body });
 const notFound = (msg = '찾을 수 없습니다') => ({ status: 404, body: { error: msg } });
 const badReq = (msg) => ({ status: 400, body: { error: msg } });
 
-// GET /api/meta — categories + age groups for the UI
+// GET /api/meta — categories + age groups + region tree for the UI
 export function getMeta() {
   return ok({
     categories: CATEGORIES,
     ageGroups: Object.entries(AGE_GROUPS).map(([key, v]) => ({ key, ...v })),
+    regions: regionTree(),
   });
 }
 
-// GET /api/facilities?category=&sort=&lat=&lng=&q=
+// GET /api/regions — city > district > zone 트리
+export function getRegions() {
+  return ok({ regions: regionTree() });
+}
+
+// GET /api/facilities?category=&sort=&lat=&lng=&q=&zone=&district=&neighborhood=
 export function listFacilities(query) {
   let items = db.facilities();
-  const { category, sort, lat, lng, q } = query;
+  const { category, sort, lat, lng, q, zone, district, neighborhood } = query;
 
   if (category && category !== 'all') {
     items = items.filter((f) => f.category === category);
   }
+  if (zone && zone !== 'all') items = items.filter((f) => f.zone === zone);
+  if (district) items = items.filter((f) => f.region && f.region.district === district);
+  if (neighborhood)
+    items = items.filter((f) => f.region && f.region.neighborhood === neighborhood);
   if (q) {
     const needle = q.toLowerCase();
     items = items.filter(
@@ -64,16 +83,41 @@ export function getFacility(id) {
   return ok({ facility: { ...f, minPrice: minPrice(f) }, promotions });
 }
 
-// GET /api/recommend?ageGroup=&categories=a,b&lat=&lng=
+// GET /api/recommend?ageGroup=&categories=a,b&lat=&lng=&zone=
 export function getRecommendations(query) {
-  const { ageGroup, categories, lat, lng } = query;
+  const { ageGroup, categories, lat, lng, zone } = query;
   const cats = categories ? categories.split(',').filter(Boolean) : [];
   const origin =
     lat != null && lng != null && !Number.isNaN(+lat) && !Number.isNaN(+lng)
       ? { lat: +lat, lng: +lng }
       : null;
-  const items = recommend(db.facilities(), { ageGroup, categories: cats, origin });
+  const items = recommend(db.facilities(), { ageGroup, categories: cats, origin, zone });
   return ok({ recommendations: items });
+}
+
+// GET /api/deals?zone= — 마감 임박 특가(유휴 인벤토리)
+export function getDeals(query) {
+  const { zone } = query;
+  return ok({ deals: aggregateDeals(db.facilities(), { zone }) });
+}
+
+// ---- Hub (플러그인) ----
+
+// GET /api/hub — 등록된 로컬 서비스 플러그인 목록
+export function hubList() {
+  return ok({ plugins: listPlugins() });
+}
+
+// GET /api/hub/:id/catalog?zone=&category=
+export function hubCatalog(id, query) {
+  const result = pluginCatalog(id, query);
+  if (!result) return notFound('플러그인을 찾을 수 없습니다');
+  return ok(result);
+}
+
+// POST /api/hub/:id/:action
+export function hubAction(id, action, body) {
+  return runPluginAction(id, action, body, { db, makeId });
 }
 
 // POST /api/checkout — { facilityId, planName, userName }
