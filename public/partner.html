@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>플레이패스 파트너 센터</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="/" class="logo">
+          <span class="mark">P</span>
+          <span>PlayPass<small>파트너 센터 · 시설 관리</small></span>
+        </a>
+        <nav class="nav">
+          <a href="/">둘러보기</a>
+          <a href="/partner.html" class="active">파트너 센터</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="partner-head">
+        <strong>운영 시설</strong>
+        <select id="facilitySelect"></select>
+        <span id="facilityHint" style="color:var(--muted);font-size:13px"></span>
+      </div>
+
+      <div class="stat-grid" id="statGrid"></div>
+
+      <div class="panel">
+        <h3>📊 요일별 예약 현황</h3>
+        <div id="dayChart"></div>
+      </div>
+
+      <div class="panel">
+        <h3>⏰ 시간대별 예약 현황</h3>
+        <div id="slotChart"></div>
+      </div>
+
+      <div class="panel">
+        <h3>🙋 실시간 예약 · 출석 관리</h3>
+        <table class="res">
+          <thead>
+            <tr><th>회원</th><th>클래스</th><th>일정</th><th>상태</th><th>출석</th></tr>
+          </thead>
+          <tbody id="resBody"></tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h3>🎉 프로모션 툴</h3>
+        <div id="promoList"></div>
+        <div class="form-inline">
+          <select id="promoType">
+            <option value="timesale">타임세일</option>
+            <option value="newbie">신규 가입 이벤트</option>
+            <option value="custom">직접 입력</option>
+          </select>
+          <input type="text" id="promoTitle" placeholder="프로모션 제목" />
+          <input type="text" id="promoDesc" class="full" placeholder="설명 (예: 평일 오후 방문 시 30% 할인)" />
+          <input type="text" id="promoPct" placeholder="할인율 % (숫자만)" />
+          <button class="btn-primary" id="addPromo">프로모션 등록</button>
+        </div>
+      </div>
+
+      <div class="footer">© 2026 PlayPass 파트너 센터 · Phase 1 MVP</div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+    <script src="/js/partner.js"></script>
+  </body>
+</html>

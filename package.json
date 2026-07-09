@@ -1,0 +1,16 @@
+{
+  "name": "playpass",
+  "version": "0.1.0",
+  "description": "플레이패스(PlayPass) — 전주 지역 기반 스포츠 통합 플랫폼 (Phase 1 MVP)",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node data/reset.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}
