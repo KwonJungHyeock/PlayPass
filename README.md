@@ -26,6 +26,37 @@ npm start
 npm run seed   # data/db.json 을 seed.json 기준으로 재설정
 ```
 
+> 📱 **모바일 대응** — 스마트폰 화면(약 360~430px)에 최적화되어 있고, 앱처럼
+> 하단 탭바(둘러보기 / 파트너)로 이동합니다. 아래 Vercel 배포 후 휴대폰에서
+> URL만 열면 모든 기능을 확인할 수 있습니다.
+
+## 배포 (Vercel)
+
+서버리스로 동작하도록 구성되어 있어 **별도 설정 없이** 바로 배포됩니다.
+
+**방법 1 — GitHub 연동 (권장)**
+1. [vercel.com](https://vercel.com) 로그인 → **Add New → Project**
+2. 이 저장소를 Import (Framework Preset은 **Other**로 자동 인식)
+3. 그대로 **Deploy** → 발급되는 `https://<프로젝트>.vercel.app` 을 휴대폰에서 열기
+
+**방법 2 — CLI**
+```bash
+npm i -g vercel
+vercel        # 미리보기 배포
+vercel --prod # 프로덕션 배포
+```
+
+동작 구조:
+- 정적 화면(`public/`)은 Vercel 정적 호스팅으로 서빙
+- 모든 `/api/*` 요청은 서버리스 함수 `api/index.js` 가 처리 (로컬 `server.js` 와
+  동일한 `src/router.js` 를 공유)
+- `vercel.json` 이 라우팅(정적 ↔ API)을 정의
+
+> ℹ️ 서버리스 환경은 파일시스템이 읽기 전용이라, 결제·예약·출석 등 **쓰기 데이터는
+> 함수 인스턴스 메모리에 유지**되며 일정 시간 후(콜드 스타트) `seed.json` 기준으로
+> 초기화됩니다. 기능 시연·확인용으로는 충분하며, 실서비스 전환 시 이 지점에
+> 실제 DB(Postgres/KV)를 연결하면 됩니다.
+
 ## 구현된 핵심 기능 (Phase 1)
 
 ### A. 사용자 앱 (User App)
@@ -69,9 +100,12 @@ Phase 3(구독형 짐플릭스 모델)로의 전환을 염두에 두고 **모듈
 
 ```
 PlayPass/
-├── server.js          # HTTP 서버 + 라우팅 + 정적 파일 서빙 (무의존성)
+├── server.js          # 로컬 개발 서버 (정적 서빙 + /api, 무의존성)
+├── api/index.js       # Vercel 서버리스 함수 (/api/* 위임)
+├── vercel.json        # 배포 라우팅 (정적 ↔ API)
 ├── src/
-│   ├── db.js          # JSON 파일 기반 데이터 스토어 (seed → db 분리)
+│   ├── router.js      # 공용 API 디스패처 (server.js·api/index.js 공유)
+│   ├── db.js          # 데이터 스토어 (로컬=파일 / 서버리스=인메모리 폴백)
 │   ├── regions.js     # 전주 지역 세분화(city>district>zone) + 존 큐레이션 규칙
 │   ├── logic.js       # 도메인 로직: 거리·정렬·추천(존 가중)·통계·마감임박 특가
 │   ├── api.js         # REST API 핸들러 (뷰와 무관한 순수 로직)
@@ -82,7 +116,7 @@ PlayPass/
 ├── data/
 │   ├── seed.json      # 전주 시설 16곳 시드 (지역/존/유휴특가 매핑)
 │   └── reset.js       # 시드 초기화 스크립트
-└── public/            # 프론트엔드 SPA
+└── public/            # 프론트엔드 SPA (모바일 반응형 + 하단 탭바)
     ├── index.html · js/app.js       # 사용자 앱
     ├── partner.html · js/partner.js # 파트너 앱
     └── css/style.css

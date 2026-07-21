@@ -41,12 +41,14 @@
 
       <div class="panel">
         <h3>🙋 실시간 예약 · 출석 관리</h3>
-        <table class="res">
-          <thead>
-            <tr><th>회원</th><th>클래스</th><th>일정</th><th>상태</th><th>출석</th></tr>
-          </thead>
-          <tbody id="resBody"></tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="res">
+            <thead>
+              <tr><th>회원</th><th>클래스</th><th>일정</th><th>상태</th><th>출석</th></tr>
+            </thead>
+            <tbody id="resBody"></tbody>
+          </table>
+        </div>
       </div>
 
       <div class="panel">
@@ -69,6 +71,12 @@
     </main>
 
     <div class="toast" id="toast"></div>
+
+    <nav class="tabbar">
+      <a href="/" class="tab"><span class="ti">🔍</span>둘러보기</a>
+      <a href="/partner.html" class="tab active"><span class="ti">🏢</span>파트너</a>
+    </nav>
+
     <script src="/js/partner.js"></script>
   </body>
 </html>

@@ -4,8 +4,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, normalize, extname } from 'node:path';
-import * as api from './src/api.js';
-import { db } from './src/db.js';
+import { routeApi } from './src/router.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const publicDir = join(here, 'public');
@@ -76,85 +75,11 @@ async function serveStatic(req, res, pathname) {
 async function handleApi(req, res, url) {
   const { pathname, searchParams } = url;
   const query = Object.fromEntries(searchParams.entries());
-  const parts = pathname.split('/').filter(Boolean); // ['api', ...]
   const method = req.method;
-
   try {
-    // GET routes
-    if (method === 'GET') {
-      if (pathname === '/api/meta') return sendJson(res, 200, api.getMeta().body);
-      if (pathname === '/api/facilities') {
-        const r = api.listFacilities(query);
-        return sendJson(res, r.status, r.body);
-      }
-      if (parts[0] === 'api' && parts[1] === 'facilities' && parts[2]) {
-        const r = api.getFacility(parts[2]);
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/recommend') {
-        const r = api.getRecommendations(query);
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/regions') {
-        const r = api.getRegions();
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/deals') {
-        const r = api.getDeals(query);
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/hub') {
-        const r = api.hubList();
-        return sendJson(res, r.status, r.body);
-      }
-      if (parts[1] === 'hub' && parts[2] && parts[3] === 'catalog') {
-        const r = api.hubCatalog(parts[2], query);
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/passes') {
-        const r = api.listPasses(query);
-        return sendJson(res, r.status, r.body);
-      }
-      if (parts[1] === 'partner' && parts[2] && parts[3] === 'dashboard') {
-        const r = api.partnerDashboard(parts[2]);
-        return sendJson(res, r.status, r.body);
-      }
-    }
-
-    // POST routes
-    if (method === 'POST') {
-      const body = await readBody(req);
-      if (pathname === '/api/checkout') {
-        const r = api.checkout(body);
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/reservations') {
-        const r = api.createReservation(body);
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/partner/checkin') {
-        const r = api.toggleCheckin(body);
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/partner/promotions') {
-        const r = api.createPromotion(body);
-        return sendJson(res, r.status, r.body);
-      }
-      if (parts[1] === 'partner' && parts[2] === 'promotions' && parts[3] && parts[4] === 'toggle') {
-        const r = api.togglePromotion(parts[3]);
-        return sendJson(res, r.status, r.body);
-      }
-      if (parts[1] === 'hub' && parts[2] && parts[3]) {
-        const r = api.hubAction(parts[2], parts[3], body);
-        return sendJson(res, r.status, r.body);
-      }
-      if (pathname === '/api/dev/reset') {
-        db.reset();
-        return sendJson(res, 200, { ok: true });
-      }
-    }
-
-    return sendJson(res, 404, { error: '알 수 없는 API 경로입니다', path: pathname });
+    const body = method === 'POST' ? await readBody(req) : {};
+    const { status, body: out } = routeApi({ method, pathname, query, body });
+    return sendJson(res, status, out);
   } catch (err) {
     return sendJson(res, 500, { error: '서버 오류', detail: String(err && err.message) });
   }
