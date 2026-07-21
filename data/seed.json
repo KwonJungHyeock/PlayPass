@@ -518,6 +518,166 @@
       "idleDeals": [
         { "day": "금", "time": "16:00", "className": "오후 학생 반값", "originalPrice": 16000, "dealPrice": 8000, "spotsLeft": 8 }
       ]
+    },
+
+    {
+      "id": "f-run-01",
+      "name": "전주천 러닝크루 스테이션",
+      "category": "running",
+      "emoji": "🏃",
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "서신동" },
+      "zone": "samcheon-seosin",
+      "address": "전주시 완산구 서신동 전주천 둔치",
+      "lat": 35.8291,
+      "lng": 127.1231,
+      "phone": "063-101-6010",
+      "rating": 4.8,
+      "reviewCount": 176,
+      "capacityMax": 50,
+      "currentOccupancy": 21,
+      "ageGroups": ["youth", "3040", "4060"],
+      "tags": ["러닝크루", "페이스그룹", "초보환영", "야외"],
+      "description": "전주천 둔치를 함께 달리는 러닝 스테이션. 페이스별 그룹과 러닝화 대여, 샤워 라커까지 갖춘 야외 러닝 베이스캠프.",
+      "priceTable": [
+        { "name": "체험 런 (1회)", "period": "1회", "price": 0, "desc": "그룹 러닝 참여" },
+        { "name": "월 정기 크루", "period": "월", "price": 39000, "desc": "주 3회 + 러닝화 대여" }
+      ],
+      "instructors": [
+        { "name": "하지원", "specialty": "러닝 코치", "career": "마라톤 서브3 · 지도 5년", "bio": "완주의 기쁨을 함께 만들어요." }
+      ],
+      "schedule": [
+        { "day": "화", "time": "19:30", "class": "초보 5K 런", "spots": 12 },
+        { "day": "토", "time": "07:00", "class": "새벽 롱런", "spots": 8 }
+      ],
+      "idleDeals": []
+    },
+    {
+      "id": "f-hike-01",
+      "name": "모악산 트레킹 클럽",
+      "category": "hiking",
+      "emoji": "🥾",
+      "region": { "city": "전주시", "district": "완산구", "neighborhood": "중인동" },
+      "zone": "samcheon-seosin",
+      "address": "전주시 완산구 중인동 모악산 입구",
+      "lat": 35.7712,
+      "lng": 127.0891,
+      "phone": "063-101-6020",
+      "rating": 4.7,
+      "reviewCount": 92,
+      "capacityMax": 30,
+      "currentOccupancy": 11,
+      "ageGroups": ["3040", "4060"],
+      "tags": ["등산", "트레킹", "가이드동행", "야외"],
+      "description": "모악산 코스를 가이드와 함께 오르는 트레킹 클럽. 난이도별 코스와 스틱·아이젠 대여를 제공합니다.",
+      "priceTable": [
+        { "name": "가이드 트레킹 (1회)", "period": "1회", "price": 25000, "desc": "장비 대여 포함" },
+        { "name": "월 4회 멤버십", "period": "월", "price": 79000, "desc": "주말 코스" }
+      ],
+      "instructors": [
+        { "name": "문상철", "specialty": "산악 가이드", "career": "숲길등산지도사 · 경력 12년", "bio": "안전하게, 천천히, 함께." }
+      ],
+      "schedule": [
+        { "day": "일", "time": "08:00", "class": "모악산 정상 코스", "spots": 6 },
+        { "day": "수", "time": "09:00", "class": "둘레길 힐링 코스", "spots": 10 }
+      ],
+      "idleDeals": [
+        { "day": "수", "time": "09:00", "className": "평일 둘레길 특가", "originalPrice": 25000, "dealPrice": 13000, "spotsLeft": 6 }
+      ]
+    },
+    {
+      "id": "f-cycle-01",
+      "name": "전주 라이딩 스테이션 에코",
+      "category": "cycling",
+      "emoji": "🚴",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "송천동" },
+      "zone": "songcheon-eco",
+      "address": "전주시 덕진구 송천동 에코시티 자전거길",
+      "lat": 35.8771,
+      "lng": 127.1231,
+      "phone": "063-101-6030",
+      "rating": 4.6,
+      "reviewCount": 68,
+      "capacityMax": 24,
+      "currentOccupancy": 7,
+      "ageGroups": ["youth", "3040", "4060"],
+      "tags": ["자전거", "라이딩크루", "대여", "야외"],
+      "description": "에코시티 자전거길 기반 라이딩 스테이션. 로드·하이브리드 자전거 대여와 코스 라이딩 그룹을 운영합니다.",
+      "priceTable": [
+        { "name": "자전거 대여 (2시간)", "period": "2시간", "price": 15000, "desc": "헬멧 포함" },
+        { "name": "라이딩 크루 월정기", "period": "월", "price": 49000, "desc": "주말 코스 라이딩" }
+      ],
+      "instructors": [
+        { "name": "권도윤", "specialty": "라이딩 리더", "career": "자전거 지도 6년", "bio": "바람을 가르는 즐거움!" }
+      ],
+      "schedule": [
+        { "day": "토", "time": "08:00", "class": "강변 코스 라이딩", "spots": 6 },
+        { "day": "일", "time": "08:00", "class": "초보 입문 라이딩", "spots": 8 }
+      ],
+      "idleDeals": []
+    },
+    {
+      "id": "f-futsal-01",
+      "name": "전주 풋살파크 덕진",
+      "category": "futsal",
+      "emoji": "⚽",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "덕진동" },
+      "zone": "jbnu",
+      "address": "전주시 덕진구 덕진동 실외 풋살구장",
+      "lat": 35.8491,
+      "lng": 127.1291,
+      "phone": "063-101-6040",
+      "rating": 4.5,
+      "reviewCount": 143,
+      "capacityMax": 40,
+      "currentOccupancy": 26,
+      "ageGroups": ["youth", "3040"],
+      "tags": ["풋살", "매치", "구장대여", "야외"],
+      "description": "인조잔디 실외 풋살 구장. 개인 참가 매치(소셜매치)와 구장 대여, 야간 조명까지 완비했습니다.",
+      "priceTable": [
+        { "name": "소셜 매치 참가", "period": "1회", "price": 12000, "desc": "개인 참가 OK" },
+        { "name": "구장 대여 (1시간)", "period": "1시간", "price": 60000, "desc": "팀 단위" }
+      ],
+      "instructors": [
+        { "name": "양세훈", "specialty": "풋살 매니저", "career": "생활축구 지도 7년", "bio": "혼자 와도 한 팀이 됩니다." }
+      ],
+      "schedule": [
+        { "day": "수", "time": "20:00", "class": "평일 야간 매치", "spots": 4 },
+        { "day": "토", "time": "18:00", "class": "주말 소셜매치", "spots": 6 }
+      ],
+      "idleDeals": [
+        { "day": "화", "time": "14:00", "className": "평일 낮 매치 특가", "originalPrice": 12000, "dealPrice": 6000, "spotsLeft": 8 }
+      ]
+    },
+    {
+      "id": "f-parkgolf-01",
+      "name": "전주 파크골프장 덕진천",
+      "category": "parkgolf",
+      "emoji": "🏌️",
+      "region": { "city": "전주시", "district": "덕진구", "neighborhood": "송천동" },
+      "zone": "songcheon-eco",
+      "address": "전주시 덕진구 덕진천 둔치 파크골프장",
+      "lat": 35.8631,
+      "lng": 127.1281,
+      "phone": "063-101-6050",
+      "rating": 4.7,
+      "reviewCount": 84,
+      "capacityMax": 36,
+      "currentOccupancy": 15,
+      "ageGroups": ["4060", "3040"],
+      "tags": ["파크골프", "9홀", "입문레슨", "야외"],
+      "description": "덕진천 둔치의 야외 파크골프장. 4060 세대에게 인기 있는 저강도 야외 스포츠로, 입문 레슨과 클럽 대여를 제공합니다.",
+      "priceTable": [
+        { "name": "9홀 라운딩", "period": "1회", "price": 8000, "desc": "클럽 대여 포함" },
+        { "name": "입문 레슨 4회", "period": "월", "price": 60000, "desc": "기초반" }
+      ],
+      "instructors": [
+        { "name": "신영자", "specialty": "파크골프 지도", "career": "파크골프 지도자 · 경력 9년", "bio": "쉽고 건강하게 즐겨요." }
+      ],
+      "schedule": [
+        { "day": "월", "time": "10:00", "class": "입문 레슨", "spots": 6 },
+        { "day": "목", "time": "10:00", "class": "라운딩 클래스", "spots": 8 }
+      ],
+      "idleDeals": []
     }
   ],
   "promotions": [

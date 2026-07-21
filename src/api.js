@@ -11,19 +11,25 @@ import {
 import { regionTree } from './regions.js';
 import { listPlugins, pluginCatalog, runPluginAction } from './plugins/registry.js';
 
+// group: 'indoor'(실내 스포츠) | 'outdoor'(야외 액티비티)
 export const CATEGORIES = [
-  { key: 'climbing', label: '클라이밍', emoji: '🧗' },
-  { key: 'crossfit', label: '크로스핏', emoji: '🏋️' },
-  { key: 'jiujitsu', label: '주짓수', emoji: '🥋' },
-  { key: 'boxing', label: '복싱', emoji: '🥊' },
-  { key: 'fitness', label: '헬스', emoji: '💪' },
-  { key: 'pilates', label: '필라테스', emoji: '🤸' },
-  { key: 'aerobic', label: '에어로빅', emoji: '💃' },
-  { key: 'dance', label: '스포츠댄스', emoji: '🕺' },
-  { key: 'yoga', label: '요가', emoji: '🧘' },
-  { key: 'tennis', label: '테니스', emoji: '🎾' },
-  { key: 'swimming', label: '수영', emoji: '🏊' },
-  { key: 'screengolf', label: '스크린골프', emoji: '⛳' },
+  { key: 'fitness', label: '헬스', emoji: '💪', group: 'indoor' },
+  { key: 'climbing', label: '클라이밍', emoji: '🧗', group: 'indoor' },
+  { key: 'crossfit', label: '크로스핏', emoji: '🏋️', group: 'indoor' },
+  { key: 'jiujitsu', label: '주짓수', emoji: '🥋', group: 'indoor' },
+  { key: 'boxing', label: '복싱', emoji: '🥊', group: 'indoor' },
+  { key: 'pilates', label: '필라테스', emoji: '🤸', group: 'indoor' },
+  { key: 'yoga', label: '요가', emoji: '🧘', group: 'indoor' },
+  { key: 'aerobic', label: '에어로빅', emoji: '💃', group: 'indoor' },
+  { key: 'dance', label: '스포츠댄스', emoji: '🕺', group: 'indoor' },
+  { key: 'swimming', label: '수영', emoji: '🏊', group: 'indoor' },
+  { key: 'screengolf', label: '스크린골프', emoji: '⛳', group: 'indoor' },
+  { key: 'running', label: '러닝', emoji: '🏃', group: 'outdoor' },
+  { key: 'hiking', label: '등산·트레킹', emoji: '🥾', group: 'outdoor' },
+  { key: 'cycling', label: '자전거', emoji: '🚴', group: 'outdoor' },
+  { key: 'futsal', label: '풋살', emoji: '⚽', group: 'outdoor' },
+  { key: 'tennis', label: '테니스', emoji: '🎾', group: 'outdoor' },
+  { key: 'parkgolf', label: '파크골프', emoji: '🏌️', group: 'outdoor' },
 ];
 
 const ok = (body) => ({ status: 200, body });

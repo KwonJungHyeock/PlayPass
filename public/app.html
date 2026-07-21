@@ -3,37 +3,69 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <title>전주 비빔핏 · BIBIMFIT</title>
+    <title>비빔핏 · BIBIMFIT</title>
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <div class="app">
+    <!-- 재사용 로고 심볼(그릇) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="bowl" viewBox="0 0 40 40">
+        <circle cx="14" cy="11" r="2.7" />
+        <circle cx="20" cy="8.4" r="2.7" />
+        <circle cx="26" cy="11" r="2.7" />
+        <rect x="5" y="16" width="30" height="3.4" rx="1.7" />
+        <path d="M7.5 20 a12.5 10.5 0 0 0 25 0 z" />
+      </symbol>
+    </svg>
+
+    <div class="app" id="app">
+      <!-- 공용 상단바 (홈 제외 탭에서 노출) -->
       <header class="appbar">
-        <div class="brand">
-          <span class="mark">비</span>
-          <span>전주 비빔핏<small>BIBIMFIT · 전주 스포츠</small></span>
-        </div>
+        <span class="logo-lockup">
+          <span class="logo-mark"><svg class="bowl"><use href="#bowl" /></svg></span>
+          <b>비빔핏</b>
+        </span>
         <span class="spacer"></span>
-        <button class="ghost-btn" id="locBtn">📍 <span id="locName">전주 전체</span></button>
+        <button class="loc-chip" id="barLoc">📍 <span class="barLocLabel">전주 전체</span> ▾</button>
       </header>
 
       <!-- 홈 -->
       <section class="screen active" id="screen-home">
-        <div class="loc-row" id="locRow"></div>
-        <div class="searchbar" id="homeSearch">
-          <span class="ic">🔍</span>
-          <input type="text" placeholder="종목·시설·지역 검색" id="homeSearchInput" readonly />
+        <div class="hero">
+          <div class="hero-top">
+            <span class="logo-lockup hero">
+              <span class="logo-mark"><svg class="bowl"><use href="#bowl" /></svg></span>
+              <b>비빔핏</b>
+            </span>
+            <button class="loc-chip ghost" id="heroLoc">📍 <span class="heroLocLabel">전주 전체</span> ▾</button>
+          </div>
+          <div class="hero-copy">전주의 모든 운동·야외활동을<br />한 그릇에 비벼 담다 🥣</div>
+          <button class="hero-search" id="homeSearch">
+            <span class="ic">🔍</span><span class="ph">종목·시설·지역 검색</span>
+          </button>
         </div>
-        <div class="cat-grid" id="homeCats"></div>
 
-        <div class="sec" id="homeDeals" hidden>
-          <div class="sec-head"><h2>⚡ 마감 임박 특가</h2><span class="sec-sub">유휴 시간대 특가</span></div>
-          <div class="hscroll" id="dealScroll"></div>
-        </div>
+        <div class="sheet-top">
+          <div class="seg" id="groupSeg">
+            <button data-g="indoor" class="on">🏋️ 실내 스포츠</button>
+            <button data-g="outdoor">⛰️ 야외 액티비티</button>
+          </div>
+          <div class="cat-grid" id="homeCats"></div>
 
-        <div class="sec" id="homeReco">
-          <div class="sec-head"><h2 id="recoHead">🔥 우리 동네 추천</h2><span class="more" data-goto="explore">전체 &rsaquo;</span></div>
-          <div class="hscroll" id="recoScroll"></div>
+          <div class="sec" id="homeDeals" hidden>
+            <div class="sec-head"><h2>⚡ 마감 임박 특가</h2><span class="more" data-goto="explore">전체 ›</span></div>
+            <div class="hscroll" id="dealScroll"></div>
+          </div>
+
+          <div class="sec" id="homeReco">
+            <div class="sec-head"><h2 id="recoHead">🔥 우리 동네 추천</h2><span class="more" data-goto="explore">전체 ›</span></div>
+            <div class="hscroll" id="recoScroll"></div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-head"><h2>🎒 액티비티 & 허브</h2><span class="more" data-goto="hub">전체 ›</span></div>
+            <div class="hscroll" id="hubShortcut"></div>
+          </div>
         </div>
       </section>
 
@@ -55,10 +87,10 @@
         <div class="flist" id="flist"></div>
       </section>
 
-      <!-- 허브 -->
+      <!-- 액티비티 (허브) -->
       <section class="screen" id="screen-hub">
-        <div class="sec-head" style="margin-bottom:6px"><h2>🧩 비빔핏 허브</h2></div>
-        <p class="sec-sub" style="margin:0 0 16px">공간을 넘어 경험·커머스·웰니스까지</p>
+        <div class="sec-head" style="margin-bottom:6px"><h2>🎒 액티비티 허브</h2></div>
+        <p class="sec-sub" style="margin:0 0 16px">운동을 넘어 경험·커머스·웰니스까지</p>
         <div class="hub-list" id="hubList"></div>
       </section>
 
@@ -70,7 +102,7 @@
       <nav class="tabbar" id="tabbar">
         <button class="tab active" data-tab="home"><span class="ti">🏠</span>홈</button>
         <button class="tab" data-tab="explore"><span class="ti">🧭</span>탐색</button>
-        <button class="tab" data-tab="hub"><span class="ti">🧩</span>허브</button>
+        <button class="tab" data-tab="hub"><span class="ti">🎒</span>액티비티</button>
         <button class="tab" data-tab="my"><span class="ti">👤</span>마이</button>
       </nav>
     </div>

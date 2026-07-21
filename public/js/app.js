@@ -1,8 +1,9 @@
-// 전주 비빔핏 — 사용자 앱 (홈 / 탐색 / 허브 / 마이)
+// 비빔핏 — 사용자 앱 (홈 / 탐색 / 허브 / 마이)
 const state = {
   tab: 'home',
   meta: null,
   category: 'all',
+  group: 'indoor', // 홈 실내/야외 세그먼트
   sort: 'rating',
   q: '',
   zone: '',
@@ -61,31 +62,44 @@ function showTab(name) {
   document.querySelectorAll('.tabbar .tab').forEach((t) =>
     t.classList.toggle('active', t.dataset.tab === name),
   );
+  // 홈에서는 오렌지 히어로가 상단바를 대신 → 공용 appbar 숨김
+  $('#app').classList.toggle('home-active', name === 'home');
   window.scrollTo(0, 0);
   if (name === 'explore') loadFacilities();
   if (name === 'hub') loadHub();
   if (name === 'my') renderMy();
 }
 
-// ---------- Location pills ----------
-function renderLocRow() {
+// ---------- Location (zone picker sheet) ----------
+function updateLocLabels() {
+  const z = state.zone ? findZone(state.zone) : null;
+  const label = z ? z.label : '전주 전체';
+  document.querySelectorAll('.heroLocLabel, .barLocLabel').forEach((el) => (el.textContent = label));
+}
+function openZonePicker() {
   const zones = state.meta.regions.districts.flatMap((d) => d.zones);
-  const pills = [{ id: '', emoji: '🗺️', label: '전주 전체' }, ...zones.map((z) => ({ id: z.id, emoji: z.emoji, label: z.label }))];
-  $('#locRow').innerHTML = pills
+  const rows = [{ id: '', emoji: '🗺️', label: '전주 전체', tagline: '모든 지역 보기' }, ...zones];
+  const html = rows
     .map(
-      (p) =>
-        `<button class="loc-pill ${state.zone === p.id ? 'active' : ''}" data-zone="${p.id}">${p.emoji} ${p.label}</button>`,
+      (z) =>
+        `<button class="zpick ${state.zone === (z.id || '') ? 'on' : ''}" data-zone="${z.id || ''}">
+          <span class="zpe">${z.emoji}</span>
+          <span class="zpt"><b>${z.label}</b><span>${z.tagline || ''}</span></span>
+          ${state.zone === (z.id || '') ? '<span class="zpck">✓</span>' : ''}
+        </button>`,
     )
     .join('');
-  $('#locRow')
-    .querySelectorAll('.loc-pill')
-    .forEach((b) => b.addEventListener('click', () => setZone(b.dataset.zone)));
+  openSheet(`<div class="sheet-body"><h1 style="margin-bottom:14px">📍 지역 선택</h1>${html}</div>`, 'auto');
+  $('#sheet').querySelectorAll('.zpick').forEach((b) =>
+    b.addEventListener('click', () => {
+      setZone(b.dataset.zone);
+      closeSheet();
+    }),
+  );
 }
 function setZone(zoneId) {
   state.zone = zoneId;
-  const z = zoneId ? findZone(zoneId) : null;
-  $('#locName').textContent = z ? z.label : '전주 전체';
-  renderLocRow();
+  updateLocLabels();
   renderZoneBanner();
   loadDeals();
   loadReco();
@@ -94,7 +108,8 @@ function setZone(zoneId) {
 
 // ---------- Home ----------
 function renderHomeCats() {
-  $('#homeCats').innerHTML = state.meta.categories
+  const cats = state.meta.categories.filter((c) => c.group === state.group);
+  $('#homeCats').innerHTML = cats
     .map(
       (c) =>
         `<button class="cat-tile" data-cat="${c.key}"><span class="cat-ic">${c.emoji}</span><span class="lb">${c.label}</span></button>`,
@@ -108,6 +123,18 @@ function renderHomeCats() {
         showTab('explore');
       }),
     );
+}
+async function loadHubShortcut() {
+  const { plugins } = await api('/api/hub');
+  $('#hubShortcut').innerHTML = plugins
+    .filter((p) => p.status === 'active')
+    .map(
+      (p) => `<button class="acard" data-id="${p.id}"><span class="ae">${p.icon}</span><span class="an">${p.name}</span></button>`,
+    )
+    .join('');
+  $('#hubShortcut')
+    .querySelectorAll('.acard')
+    .forEach((b) => b.addEventListener('click', () => openHub(b.dataset.id)));
 }
 
 async function loadDeals() {
@@ -235,11 +262,13 @@ function fcard(f) {
 }
 
 // ---------- Detail sheet ----------
-function openSheet(html) {
-  $('#sheet').innerHTML = `<div class="sheet-grab"></div><button class="sheet-close" id="sheetClose">✕</button>` + html;
+function openSheet(html, size) {
+  const s = $('#sheet');
+  s.classList.toggle('auto', size === 'auto');
+  s.innerHTML = `<div class="sheet-grab"></div><button class="sheet-close" id="sheetClose">✕</button>` + html;
   $('#sheetBack').classList.add('open');
-  $('#sheet').classList.add('open');
-  $('#sheet').scrollTop = 0;
+  s.classList.add('open');
+  s.scrollTop = 0;
   $('#sheetClose').addEventListener('click', closeSheet);
 }
 function closeSheet() {
@@ -388,7 +417,7 @@ async function renderMy() {
     ? crew.map((c) => `<div class="mi"><span class="mic">🤝</span><div class="mt"><b>${c.crewTitle}</b><div>가입일 ${new Date(c.joinedAt).toLocaleDateString('ko-KR')}</div></div></div>`).join('')
     : `<div class="sec-sub" style="padding:4px 2px">가입한 크루가 없어요.</div>`;
   el.innerHTML = `
-    <div class="my-hero"><div class="mh-name">${user}님</div><div class="mh-sub">전주 비빔핏과 함께 건강한 라이프스타일 🥗</div>
+    <div class="my-hero"><div class="mh-name">${user}님</div><div class="mh-sub">비빔핏과 함께 건강한 라이프스타일 🥗</div>
     <button class="mh-edit" id="setNick">닉네임 변경</button></div>
     <div class="my-block"><h3>🎫 내 수강권</h3>${passHtml}</div>
     <div class="my-block"><h3>📅 내 예약</h3>${resHtml}</div>
@@ -403,17 +432,29 @@ async function renderMy() {
 // ---------- Init ----------
 async function init() {
   state.meta = await api('/api/meta');
-  renderLocRow();
+  $('#app').classList.add('home-active');
   renderHomeCats();
   renderCatChips();
+  updateLocLabels();
   loadDeals();
   loadReco();
+  loadHubShortcut();
 
   document.querySelectorAll('.tabbar .tab').forEach((t) => t.addEventListener('click', () => showTab(t.dataset.tab)));
   document.querySelectorAll('[data-goto]').forEach((el) => el.addEventListener('click', () => showTab(el.dataset.goto)));
-  $('#locBtn').addEventListener('click', () => showTab('home'));
+  $('#heroLoc').addEventListener('click', openZonePicker);
+  $('#barLoc').addEventListener('click', openZonePicker);
 
-  // 홈 검색창 탭 → 탐색으로 이동해 검색
+  // 실내/야외 세그먼트
+  $('#groupSeg').querySelectorAll('button').forEach((b) =>
+    b.addEventListener('click', () => {
+      state.group = b.dataset.g;
+      $('#groupSeg').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
+      renderHomeCats();
+    }),
+  );
+
+  // 홈 검색 → 탐색으로 이동해 검색
   $('#homeSearch').addEventListener('click', () => {
     showTab('explore');
     setTimeout(() => $('#exploreSearchInput').focus(), 60);

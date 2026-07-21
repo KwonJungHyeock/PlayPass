@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>전주 비빔핏 · 스마트폰 미리보기</title>
+    <title>비빔핏 · 스마트폰 미리보기</title>
     <link rel="stylesheet" href="/css/style.css" />
     <script>
       // 스마트폰에서 접속하면 미리보기 대신 앱을 바로 실행
@@ -11,23 +11,33 @@
     </script>
   </head>
   <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="bowl" viewBox="0 0 40 40">
+        <circle cx="14" cy="11" r="2.7" />
+        <circle cx="20" cy="8.4" r="2.7" />
+        <circle cx="26" cy="11" r="2.7" />
+        <rect x="5" y="16" width="30" height="3.4" rx="1.7" />
+        <path d="M7.5 20 a12.5 10.5 0 0 0 25 0 z" />
+      </symbol>
+    </svg>
+
     <main class="preview">
       <div class="pv-left">
         <div class="pv-brand">
-          <span class="mark">비</span>
-          <span>전주 비빔핏<small>BIBIMFIT · 전주 스포츠 플랫폼</small></span>
+          <span class="mark"><svg class="bowl"><use href="#bowl" /></svg></span>
+          <span>비빔핏<small>BIBIMFIT · 전주 스포츠·야외활동 허브</small></span>
         </div>
-        <div class="pv-kicker">BIBIMFIT — <b>Mix your move.</b> 🥗</div>
-        <h1>전주의 모든 운동을<br /><span class="hl">한 그릇</span>에 비벼 담다</h1>
+        <div class="pv-kicker">BIBIMFIT — <b>Mix your move.</b> 🥣</div>
+        <h1>전주의 모든 운동·야외활동을<br /><span class="hl">한 그릇</span>에 비벼 담다</h1>
         <p class="lead">
-          에어로빅부터 주짓수까지 — 전주 전역의 운동 시설을 비교·예약·등록하고,
-          우리 동네 특가와 크루까지 한 앱에서. 아래 스마트폰 화면에서 바로 체험해 보세요.
+          헬스·클라이밍부터 러닝·등산·자전거·풋살까지 — 전주의 실내 스포츠와 야외
+          액티비티를 한곳에서 비교·예약하고, 특가·크루까지. 아래 스마트폰에서 바로 체험해 보세요.
         </p>
 
         <div class="pv-feats">
-          <div class="pv-feat"><span class="fi">🧭</span><div><b>구·동 단위 지역 큐레이션</b><p>완산·덕진, 신시가지·전북대까지 우리 동네 맞춤 추천</p></div></div>
+          <div class="pv-feat"><span class="fi">🏋️</span><div><b>실내 스포츠 + 야외 액티비티</b><p>헬스·주짓수부터 러닝·등산·풋살까지 한 허브에서</p></div></div>
           <div class="pv-feat"><span class="fi">⚡</span><div><b>마감임박 특가</b><p>유휴 시간대를 특가로 — 야놀자식 실시간 인벤토리</p></div></div>
-          <div class="pv-feat"><span class="fi">🧩</span><div><b>비빔핏 허브</b><p>원데이 클래스·크루 매칭·용품 대여까지 확장</p></div></div>
+          <div class="pv-feat"><span class="fi">🎒</span><div><b>액티비티 허브</b><p>원데이 클래스·크루 매칭·용품 대여까지 확장</p></div></div>
         </div>
 
         <div>
@@ -43,7 +53,7 @@
         <div class="phone">
           <div class="phone-screen">
             <div class="island"></div>
-            <iframe id="pvFrame" src="/app" title="전주 비빔핏 미리보기"></iframe>
+            <iframe id="pvFrame" src="/app" title="비빔핏 미리보기"></iframe>
           </div>
         </div>
         <div class="phone-caption" id="pvCaption">👆 실제 스마트폰과 동일한 화면입니다 · 터치처럼 클릭해 보세요</div>

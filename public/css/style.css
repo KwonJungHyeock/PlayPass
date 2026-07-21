@@ -63,6 +63,52 @@ img { max-width: 100%; }
 .brand small { display: block; font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 0; }
 .appbar .spacer { margin-left: auto; }
 .appbar .ghost-btn { font-size: 13px; color: var(--sub); font-weight: 600; padding: 7px 11px; border-radius: 9px; background: var(--bg2); }
+.app.home-active .appbar { display: none; } /* 홈은 오렌지 히어로가 상단을 대신 */
+
+/* ---- Logo lockup (그릇 심볼 + 비빔핏) ---- */
+.logo-lockup { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 19px; letter-spacing: -0.6px; }
+.logo-mark { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--brand), #ff9a4d); }
+.bowl { width: 21px; height: 21px; fill: currentColor; display: block; }
+.logo-lockup.hero { color: #fff; font-size: 20px; }
+.logo-lockup.hero .logo-mark { background: #fff; color: var(--brand); }
+
+/* location chip */
+.loc-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; padding: 8px 12px; border-radius: 999px; background: var(--bg2); color: var(--sub); }
+.loc-chip.ghost { background: rgba(255,255,255,0.22); color: #fff; }
+
+/* ---- Home: 오렌지 히어로 (야놀자 스타일) ---- */
+#screen-home { padding: 0; }
+.hero {
+  background: linear-gradient(155deg, var(--brand) 10%, #ff9331 100%);
+  color: #fff; padding: calc(16px + env(safe-area-inset-top)) 18px 34px;
+}
+.hero-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.hero-copy { font-size: 20px; font-weight: 800; line-height: 1.34; letter-spacing: -0.6px; margin-bottom: 16px; }
+.hero-search {
+  width: 100%; display: flex; align-items: center; gap: 10px; background: #fff;
+  border-radius: 15px; padding: 15px 17px; box-shadow: 0 10px 24px rgba(180,70,0,0.22);
+}
+.hero-search .ic { font-size: 18px; }
+.hero-search .ph { color: var(--muted); font-size: 15px; font-weight: 500; }
+
+.sheet-top { background: var(--bg); border-radius: 22px 22px 0 0; margin-top: -20px; position: relative; padding: 20px 16px 8px; min-height: 40vh; }
+.seg { display: flex; background: var(--bg2); border-radius: 13px; padding: 4px; gap: 4px; margin-bottom: 20px; }
+.seg button { flex: 1; padding: 11px 8px; border-radius: 10px; font-size: 13.5px; font-weight: 700; color: var(--muted); }
+.seg button.on { background: #fff; color: var(--ink); box-shadow: var(--shadow-sm); }
+
+/* activity shortcut cards */
+.acard { flex: 0 0 auto; width: 100px; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 16px 8px; background: var(--card); border: 1px solid var(--line); border-radius: 15px; box-shadow: var(--shadow-sm); }
+.acard .ae { font-size: 26px; }
+.acard .an { font-size: 12px; font-weight: 700; color: var(--sub); text-align: center; line-height: 1.25; }
+
+/* zone picker rows */
+.zpick { display: flex; align-items: center; gap: 13px; width: 100%; padding: 14px 13px; border-radius: 13px; border: 1px solid var(--line2); margin-bottom: 9px; text-align: left; }
+.zpick.on { border-color: var(--brand); background: var(--brand-soft); }
+.zpick .zpe { font-size: 24px; }
+.zpick .zpt { flex: 1; }
+.zpick .zpt b { font-size: 15px; }
+.zpick .zpt span { display: block; font-size: 12px; color: var(--muted); }
+.zpick .zpck { color: var(--brand); font-weight: 800; font-size: 16px; }
 
 /* Screens */
 .screen { display: none; padding: 16px; animation: fade 0.18s ease; }
@@ -215,6 +261,7 @@ img { max-width: 100%; }
   overflow-y: auto; -webkit-overflow-scrolling: touch;
 }
 .sheet.open { transform: translateX(-50%) translateY(0); }
+.sheet.auto { height: auto; max-height: 82vh; }
 .sheet-grab { position: sticky; top: 0; background: #fff; padding: 10px 0 6px; text-align: center; z-index: 2; }
 .sheet-grab::before { content: ''; display: inline-block; width: 40px; height: 4px; border-radius: 3px; background: var(--line2); }
 .sheet-close { position: absolute; top: 12px; right: 14px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg2); font-size: 16px; z-index: 3; }
@@ -311,7 +358,8 @@ table.res th { font-size: 12px; color: var(--muted); }
     min-height: 100vh; padding: 40px 48px; max-width: 1180px; margin: 0 auto;
   }
   .pv-left .pv-brand { display: flex; align-items: center; gap: 11px; font-size: 26px; font-weight: 800; letter-spacing: -0.8px; }
-  .pv-left .pv-brand .mark { width: 46px; height: 46px; border-radius: 13px; color: #fff; font-size: 24px; display: grid; place-items: center; background: linear-gradient(135deg, var(--brand), #ff9445); }
+  .pv-left .pv-brand .mark { width: 46px; height: 46px; border-radius: 13px; color: #fff; display: grid; place-items: center; background: linear-gradient(135deg, var(--brand), #ff9445); }
+  .pv-left .pv-brand .mark .bowl { width: 28px; height: 28px; }
   .pv-left .pv-brand small { display: block; font-size: 12px; font-weight: 600; color: var(--muted); }
   .pv-kicker { margin-top: 22px; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; color: var(--brand); text-transform: uppercase; }
   .pv-kicker b { color: var(--ink); }
