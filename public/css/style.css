@@ -1,15 +1,16 @@
 :root {
-  --brand: #ff3e4d;        /* 비빔핏 레드 (비빔밥의 고추장 톤) */
-  --brand-dark: #e42a39;
-  --brand-soft: #fff0f1;
-  --accent: #ff8a00;       /* 마감임박 특가 등 포인트 */
-  --ink: #191b1f;
+  --brand: #ff6a1f;        /* BIBIMFIT 시그니처 오렌지 */
+  --brand-dark: #e85410;
+  --brand-soft: #fff2e9;
+  --brand-tint: #fff8f3;
+  --accent: #ffa227;       /* 앰버 포인트 */
+  --ink: #17181c;
   --sub: #545a63;
-  --muted: #9298a1;
+  --muted: #969ba4;
   --line: #eef0f3;
-  --line2: #e3e6ea;
+  --line2: #e4e7eb;
   --bg: #ffffff;
-  --bg2: #f6f7f9;
+  --bg2: #f7f8fa;
   --card: #ffffff;
   --ok: #12b76a;
   --warn: #f79009;
@@ -52,12 +53,12 @@ img { max-width: 100%; }
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
   display: flex; align-items: center; gap: 8px;
-  padding: 12px 16px calc(12px + env(safe-area-inset-top));
+  padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
 }
 .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
 .brand .mark {
   width: 30px; height: 30px; border-radius: 9px; color: #fff; font-size: 16px;
-  display: grid; place-items: center; background: linear-gradient(135deg, var(--brand), #ff6a53);
+  display: grid; place-items: center; background: linear-gradient(135deg, var(--brand), #ff9445);
 }
 .brand small { display: block; font-size: 10px; font-weight: 600; color: var(--muted); letter-spacing: 0; }
 .appbar .spacer { margin-left: auto; }
@@ -83,7 +84,7 @@ img { max-width: 100%; }
   padding: 8px 13px; border-radius: 999px; background: var(--bg2); font-size: 13px; font-weight: 600; color: var(--sub);
   border: 1px solid transparent;
 }
-.loc-pill.active { background: var(--brand-soft); color: var(--brand-dark); border-color: #ffd7db; }
+.loc-pill.active { background: var(--brand-soft); color: var(--brand-dark); border-color: #ffd6b8; }
 
 .searchbar {
   display: flex; align-items: center; gap: 9px; width: 100%;
@@ -101,7 +102,7 @@ img { max-width: 100%; }
   font-size: 27px; background: var(--bg2); transition: 0.12s;
 }
 .cat-tile:active .cat-ic { transform: scale(0.94); }
-.cat-tile.on .cat-ic { background: var(--brand-soft); box-shadow: inset 0 0 0 1.5px #ffd0d5; }
+.cat-tile.on .cat-ic { background: var(--brand-soft); box-shadow: inset 0 0 0 1.5px #ffceac; }
 .cat-tile .lb { font-size: 12px; color: var(--sub); font-weight: 600; }
 
 /* Horizontal scrollers */
@@ -114,11 +115,11 @@ img { max-width: 100%; }
   box-shadow: var(--shadow-sm); border: 1px solid var(--line); overflow: hidden; position: relative;
 }
 .deal .thumb { height: 84px; background: linear-gradient(135deg, #fff4ec, var(--brand-soft)); display: grid; place-items: center; font-size: 34px; }
-.deal .badge { position: absolute; top: 9px; left: 9px; background: var(--danger); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 8px; }
+.deal .badge { position: absolute; top: 9px; left: 9px; background: var(--brand-dark); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 8px; }
 .deal .db { padding: 10px 12px 12px; }
 .deal .dn { font-weight: 700; font-size: 13px; line-height: 1.35; }
 .deal .dc { font-size: 11px; color: var(--muted); margin: 3px 0 6px; }
-.deal .dp { font-weight: 800; font-size: 15px; color: var(--danger); }
+.deal .dp { font-weight: 800; font-size: 15px; color: var(--brand-dark); }
 .deal .dp s { color: var(--muted); font-weight: 500; font-size: 11px; margin-left: 4px; }
 .deal .dl { font-size: 11px; color: var(--warn); font-weight: 700; margin-top: 3px; }
 
@@ -178,7 +179,7 @@ img { max-width: 100%; }
 .tag-status.planned { background: #fff3e0; color: var(--warn); }
 
 /* ---- My ---- */
-.my-hero { background: linear-gradient(135deg, var(--brand), #ff6a53); color: #fff; border-radius: var(--r-lg); padding: 20px; margin-bottom: 18px; }
+.my-hero { background: linear-gradient(135deg, var(--brand), #ff9445); color: #fff; border-radius: var(--r-lg); padding: 20px; margin-bottom: 18px; }
 .my-hero .mh-name { font-size: 20px; font-weight: 800; }
 .my-hero .mh-sub { font-size: 13px; opacity: 0.92; margin-top: 3px; }
 .my-hero .mh-edit { margin-top: 12px; background: rgba(255,255,255,0.9); color: var(--ink); font-weight: 700; font-size: 13px; padding: 8px 14px; border-radius: 10px; }
@@ -245,11 +246,11 @@ img { max-width: 100%; }
 .hub-item button { background: var(--brand); color: #fff; padding: 8px 15px; border-radius: 10px; font-size: 13px; font-weight: 700; white-space: nowrap; }
 
 /* Zone banner (explore) */
-.zone-banner { border-radius: 14px; padding: 15px 16px; color: #fff; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--brand), #ff6a53); }
-.zone-banner.trendy { background: linear-gradient(135deg, #ff3e4d, #ff2d78); }
-.zone-banner.community { background: linear-gradient(135deg, #12b76a, #4ade80); }
-.zone-banner.family { background: linear-gradient(135deg, #6366f1, #22d3ee); }
-.zone-banner.value { background: linear-gradient(135deg, #ff8a00, #ff3e4d); }
+.zone-banner { border-radius: 14px; padding: 15px 16px; color: #fff; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, var(--brand), #ff9445); }
+.zone-banner.trendy { background: linear-gradient(135deg, #ff7a1a, #ff4e2b); }
+.zone-banner.community { background: linear-gradient(135deg, #ff9f1c, #ff6a2c); }
+.zone-banner.family { background: linear-gradient(135deg, #ff8a3d, #ffb020); }
+.zone-banner.value { background: linear-gradient(135deg, #ff6a2c, #e8420e); }
 .zone-banner .zbe { font-size: 30px; }
 .zone-banner .zbt { font-weight: 800; font-size: 15px; }
 .zone-banner .zbn { font-size: 12px; opacity: 0.95; }
@@ -310,9 +311,11 @@ table.res th { font-size: 12px; color: var(--muted); }
     min-height: 100vh; padding: 40px 48px; max-width: 1180px; margin: 0 auto;
   }
   .pv-left .pv-brand { display: flex; align-items: center; gap: 11px; font-size: 26px; font-weight: 800; letter-spacing: -0.8px; }
-  .pv-left .pv-brand .mark { width: 46px; height: 46px; border-radius: 13px; color: #fff; font-size: 24px; display: grid; place-items: center; background: linear-gradient(135deg, var(--brand), #ff6a53); }
+  .pv-left .pv-brand .mark { width: 46px; height: 46px; border-radius: 13px; color: #fff; font-size: 24px; display: grid; place-items: center; background: linear-gradient(135deg, var(--brand), #ff9445); }
   .pv-left .pv-brand small { display: block; font-size: 12px; font-weight: 600; color: var(--muted); }
-  .pv-left h1 { font-size: 40px; line-height: 1.18; letter-spacing: -1.3px; margin: 26px 0 14px; }
+  .pv-kicker { margin-top: 22px; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; color: var(--brand); text-transform: uppercase; }
+  .pv-kicker b { color: var(--ink); }
+  .pv-left h1 { font-size: 40px; line-height: 1.18; letter-spacing: -1.3px; margin: 8px 0 14px; }
   .pv-left h1 .hl { color: var(--brand); }
   .pv-left .lead { font-size: 16px; color: var(--sub); max-width: 420px; }
   .pv-feats { margin: 26px 0 30px; display: flex; flex-direction: column; gap: 13px; }
@@ -325,20 +328,25 @@ table.res th { font-size: 12px; color: var(--muted); }
   .pv-toggle button.on { background: #fff; color: var(--ink); box-shadow: var(--shadow-sm); }
   .pv-open { display: inline-block; margin-left: 14px; font-size: 14px; font-weight: 700; color: var(--brand); }
 
-  /* Phone frame */
+  /* Phone frame — vh-capped so it never clips top/bottom */
   .device { justify-self: center; }
   .phone {
-    width: 392px; height: 812px; background: #0f1115; border-radius: 54px; padding: 13px;
-    box-shadow: 0 40px 90px rgba(20,24,40,0.28), 0 0 0 2px #2a2d34, inset 0 0 0 2px #000;
+    width: 348px;
+    height: min(716px, calc(100vh - 72px));
+    background: #0b0d12; border-radius: 46px; padding: 11px;
+    box-shadow: 0 30px 70px rgba(20,24,40,0.26), 0 0 0 2px #23262d, inset 0 0 0 2px #000;
     position: relative;
   }
-  .phone::after { /* notch */
-    content: ''; position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
-    width: 150px; height: 30px; background: #0f1115; border-radius: 0 0 18px 18px; z-index: 3;
+  .phone-screen {
+    width: 100%; height: 100%; border-radius: 37px; overflow: hidden; background: #fff;
+    position: relative; padding-top: 26px; /* 상단 카메라/상태바 영역 → 앱 콘텐츠 안 가림 */
   }
-  .phone-screen { width: 100%; height: 100%; border-radius: 42px; overflow: hidden; background: #fff; position: relative; }
-  .phone-screen iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .phone-caption { text-align: center; margin-top: 18px; font-size: 13px; color: var(--muted); }
+  .island { /* 다이내믹 아일랜드형 카메라 */
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 92px; height: 25px; background: #0b0d12; border-radius: 999px; z-index: 5;
+  }
+  .phone-screen iframe { width: 100%; height: calc(100% - 26px); border: 0; display: block; background: #fff; }
+  .phone-caption { text-align: center; margin-top: 14px; font-size: 13px; color: var(--muted); }
 }
 
 /* Hide the app/partner chrome-less body scroll when previewing is not active:
