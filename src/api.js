@@ -160,6 +160,23 @@ export function listPasses(query) {
   return ok({ passes: items });
 }
 
+// GET /api/my?user= — 마이 탭용 집계(수강권 + 예약 + 크루)
+export function getMy(query) {
+  const user = (query.user || '').trim();
+  const s = db.all;
+  const passes = user ? s.passes.filter((p) => p.userName === user) : [];
+  const reservations = user
+    ? s.reservations
+        .filter((r) => r.userName === user)
+        .map((r) => {
+          const f = db.facility(r.facilityId);
+          return { ...r, facilityName: f ? f.name : r.facilityId, emoji: f ? f.emoji : '📍' };
+        })
+    : [];
+  const crew = user ? (s.crewMembers || []).filter((c) => c.userName === user) : [];
+  return ok({ user, passes, reservations, crew });
+}
+
 // POST /api/reservations — { facilityId, className, classDay, classTime, userName }
 export function createReservation(body) {
   const { facilityId, className, classDay, classTime, userName } = body || {};

@@ -17,6 +17,7 @@ export function routeApi({ method, pathname, query = {}, body = {} }) {
     if (pathname === '/api/hub') return api.hubList();
     if (parts[1] === 'hub' && parts[2] && parts[3] === 'catalog') return api.hubCatalog(parts[2], query);
     if (pathname === '/api/passes') return api.listPasses(query);
+    if (pathname === '/api/my') return api.getMy(query);
     if (parts[1] === 'partner' && parts[2] && parts[3] === 'dashboard') return api.partnerDashboard(parts[2]);
   }
 

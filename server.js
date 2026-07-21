@@ -46,8 +46,16 @@ function readBody(req) {
   });
 }
 
+// Extensionless / pretty routes → html files (mirrors vercel.json)
+const PRETTY = {
+  '/': '/preview.html',
+  '/preview': '/preview.html',
+  '/app': '/app.html',
+  '/partner': '/partner.html',
+};
+
 async function serveStatic(req, res, pathname) {
-  let rel = pathname === '/' ? '/index.html' : pathname;
+  const rel = PRETTY[pathname] || pathname;
   // prevent path traversal
   const filePath = normalize(join(publicDir, rel));
   if (!filePath.startsWith(publicDir)) {
@@ -61,9 +69,9 @@ async function serveStatic(req, res, pathname) {
     res.writeHead(200, { 'content-type': MIME[extname(filePath)] || 'application/octet-stream' });
     res.end(buf);
   } catch {
-    // SPA fallback for unknown non-file routes
+    // fallback for unknown non-file routes → showcase page
     if (!extname(filePath)) {
-      const buf = await readFile(join(publicDir, 'index.html'));
+      const buf = await readFile(join(publicDir, 'preview.html'));
       res.writeHead(200, { 'content-type': MIME['.html'] });
       return res.end(buf);
     }
@@ -94,7 +102,8 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`\n🏃 PlayPass MVP 서버 실행 중`);
-  console.log(`   사용자 앱   → http://localhost:${PORT}/`);
-  console.log(`   파트너 앱   → http://localhost:${PORT}/partner.html\n`);
+  console.log(`\n🥗 전주 비빔핏 MVP 서버 실행 중`);
+  console.log(`   미리보기(데스크톱) → http://localhost:${PORT}/`);
+  console.log(`   사용자 앱          → http://localhost:${PORT}/app`);
+  console.log(`   파트너 앱          → http://localhost:${PORT}/partner\n`);
 });

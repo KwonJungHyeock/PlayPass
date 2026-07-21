@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>전주 비빔핏 · 스마트폰 미리보기</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script>
+      // 스마트폰에서 접속하면 미리보기 대신 앱을 바로 실행
+      if (window.innerWidth < 900) location.replace('/app');
+    </script>
+  </head>
+  <body>
+    <main class="preview">
+      <div class="pv-left">
+        <div class="pv-brand">
+          <span class="mark">비</span>
+          <span>전주 비빔핏<small>전주 스포츠 통합 플랫폼</small></span>
+        </div>
+        <h1>전주의 모든 운동을<br /><span class="hl">한 그릇</span>에 비벼 담다 🥗</h1>
+        <p class="lead">
+          에어로빅부터 주짓수까지 — 전주 전역의 운동 시설을 비교·예약·등록하고,
+          우리 동네 특가와 크루까지 한 앱에서. 아래 스마트폰 화면에서 바로 체험해 보세요.
+        </p>
+
+        <div class="pv-feats">
+          <div class="pv-feat"><span class="fi">🧭</span><div><b>구·동 단위 지역 큐레이션</b><p>완산·덕진, 신시가지·전북대까지 우리 동네 맞춤 추천</p></div></div>
+          <div class="pv-feat"><span class="fi">⚡</span><div><b>마감임박 특가</b><p>유휴 시간대를 특가로 — 야놀자식 실시간 인벤토리</p></div></div>
+          <div class="pv-feat"><span class="fi">🧩</span><div><b>비빔핏 허브</b><p>원데이 클래스·크루 매칭·용품 대여까지 확장</p></div></div>
+        </div>
+
+        <div>
+          <div class="pv-toggle" id="pvToggle">
+            <button data-src="/app" class="on">📱 사용자 앱</button>
+            <button data-src="/partner">🏢 파트너 앱</button>
+          </div>
+          <a class="pv-open" id="pvOpen" href="/app" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+      </div>
+
+      <div class="device">
+        <div class="phone">
+          <div class="phone-screen">
+            <iframe id="pvFrame" src="/app" title="전주 비빔핏 미리보기"></iframe>
+          </div>
+        </div>
+        <div class="phone-caption" id="pvCaption">👆 실제 스마트폰과 동일한 화면입니다 · 터치처럼 클릭해 보세요</div>
+      </div>
+    </main>
+
+    <script>
+      const frame = document.getElementById('pvFrame');
+      const openLink = document.getElementById('pvOpen');
+      const caption = document.getElementById('pvCaption');
+      document.querySelectorAll('#pvToggle button').forEach((b) => {
+        b.addEventListener('click', () => {
+          document.querySelectorAll('#pvToggle button').forEach((x) => x.classList.toggle('on', x === b));
+          frame.src = b.dataset.src;
+          openLink.href = b.dataset.src;
+          caption.textContent =
+            b.dataset.src === '/partner'
+              ? '🏢 시설 관리자용 파트너 센터 화면입니다'
+              : '👆 실제 스마트폰과 동일한 화면입니다 · 터치처럼 클릭해 보세요';
+        });
+      });
+    </script>
+  </body>
+</html>

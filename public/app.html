@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>전주 비빔핏</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="appbar">
+        <div class="brand">
+          <span class="mark">비</span>
+          <span>전주 비빔핏<small>전주 스포츠 통합 플랫폼</small></span>
+        </div>
+        <span class="spacer"></span>
+        <button class="ghost-btn" id="locBtn">📍 <span id="locName">전주 전체</span></button>
+      </header>
+
+      <!-- 홈 -->
+      <section class="screen active" id="screen-home">
+        <div class="loc-row" id="locRow"></div>
+        <div class="searchbar" id="homeSearch">
+          <span class="ic">🔍</span>
+          <input type="text" placeholder="종목·시설·지역 검색" id="homeSearchInput" readonly />
+        </div>
+        <div class="cat-grid" id="homeCats"></div>
+
+        <div class="sec" id="homeDeals" hidden>
+          <div class="sec-head"><h2>⚡ 마감 임박 특가</h2><span class="sec-sub">유휴 시간대 특가</span></div>
+          <div class="hscroll" id="dealScroll"></div>
+        </div>
+
+        <div class="sec" id="homeReco">
+          <div class="sec-head"><h2 id="recoHead">🔥 우리 동네 추천</h2><span class="more" data-goto="explore">전체 &rsaquo;</span></div>
+          <div class="hscroll" id="recoScroll"></div>
+        </div>
+      </section>
+
+      <!-- 탐색 -->
+      <section class="screen" id="screen-explore">
+        <div class="searchbar" style="margin-bottom:14px">
+          <span class="ic">🔍</span>
+          <input type="text" placeholder="종목·시설·지역 검색" id="exploreSearchInput" />
+        </div>
+        <div class="zone-banner" id="zoneBanner" hidden></div>
+        <div class="filterbar">
+          <div class="chips" id="catChips"></div>
+          <div class="sortrow" id="sortRow">
+            <button data-sort="rating" class="on">후기순</button>
+            <button data-sort="price">가격순</button>
+            <button data-sort="distance">거리순</button>
+          </div>
+        </div>
+        <div class="flist" id="flist"></div>
+      </section>
+
+      <!-- 허브 -->
+      <section class="screen" id="screen-hub">
+        <div class="sec-head" style="margin-bottom:6px"><h2>🧩 비빔핏 허브</h2></div>
+        <p class="sec-sub" style="margin:0 0 16px">공간을 넘어 경험·커머스·웰니스까지</p>
+        <div class="hub-list" id="hubList"></div>
+      </section>
+
+      <!-- 마이 -->
+      <section class="screen" id="screen-my">
+        <div id="myContent"></div>
+      </section>
+
+      <nav class="tabbar" id="tabbar">
+        <button class="tab active" data-tab="home"><span class="ti">🏠</span>홈</button>
+        <button class="tab" data-tab="explore"><span class="ti">🧭</span>탐색</button>
+        <button class="tab" data-tab="hub"><span class="ti">🧩</span>허브</button>
+        <button class="tab" data-tab="my"><span class="ti">👤</span>마이</button>
+      </nav>
+    </div>
+
+    <div class="sheet-back" id="sheetBack"></div>
+    <div class="sheet" id="sheet"></div>
+    <div class="toast" id="toast"></div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
