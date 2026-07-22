@@ -33,7 +33,7 @@
       <section class="screen active" id="screen-home">
         <div class="hero">
           <div class="hero-top">
-            <span class="logo-lockup hero">
+            <span class="logo-lockup inv">
               <span class="logo-mark"><svg class="bowl"><use href="#bowl" /></svg></span>
               <b>비빔핏</b>
             </span>
@@ -62,11 +62,41 @@
             <div class="hscroll" id="recoScroll"></div>
           </div>
 
+          <div class="sec" id="homePopular">
+            <div class="sec-head"><h2>🔥 지금 뜨는 글</h2><span class="more" data-goto="community">전체 ›</span></div>
+            <div id="homePopList"></div>
+          </div>
+
           <div class="sec">
             <div class="sec-head"><h2>🎒 액티비티 & 허브</h2><span class="more" data-goto="hub">전체 ›</span></div>
             <div class="hscroll" id="hubShortcut"></div>
           </div>
         </div>
+      </section>
+
+      <!-- 커뮤니티 -->
+      <section class="screen" id="screen-community">
+        <div class="cm-top">
+          <h2>💬 커뮤니티</h2>
+          <button class="cm-write" id="cmWrite">✏️ 글쓰기</button>
+        </div>
+        <div class="seg" id="cmSeg">
+          <button data-tab="all" class="on">전체</button>
+          <button data-tab="review">⭐ 업체후기</button>
+          <button data-tab="post">✍️ 자유글</button>
+        </div>
+        <div class="cm-popbox">
+          <div class="cm-pop-head">
+            <b>🔥 인기글</b>
+            <div class="periodseg" id="cmPeriod">
+              <button data-p="week" class="on">이번주</button>
+              <button data-p="month">월간</button>
+            </div>
+          </div>
+          <div id="cmPopList"></div>
+        </div>
+        <div class="cm-list-title">📝 최신글</div>
+        <div class="cm-list" id="cmList"></div>
       </section>
 
       <!-- 탐색 -->
@@ -102,6 +132,7 @@
       <nav class="tabbar" id="tabbar">
         <button class="tab active" data-tab="home"><span class="ti">🏠</span>홈</button>
         <button class="tab" data-tab="explore"><span class="ti">🧭</span>탐색</button>
+        <button class="tab" data-tab="community"><span class="ti">💬</span>커뮤니티</button>
         <button class="tab" data-tab="hub"><span class="ti">🎒</span>액티비티</button>
         <button class="tab" data-tab="my"><span class="ti">👤</span>마이</button>
       </nav>

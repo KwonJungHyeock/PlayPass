@@ -107,6 +107,75 @@ export function getDeals(query) {
   return ok({ deals: aggregateDeals(db.facilities(), { zone }) });
 }
 
+// ---- 커뮤니티 (업체후기 · 인기글) ----
+
+function withinDays(iso, days, now) {
+  const t = new Date(iso).getTime();
+  return now - t <= days * 86400000;
+}
+
+// GET /api/community?tab=all|review|post&sort=recent|popular&period=all|week|month
+export function listCommunity(query) {
+  const { tab = 'all', sort = 'recent', period = 'all' } = query;
+  const now = Date.now();
+  let items = (db.all.community || []).slice();
+  if (tab === 'review') items = items.filter((p) => p.type === 'review');
+  else if (tab === 'post') items = items.filter((p) => p.type === 'post');
+  if (period === 'week') items = items.filter((p) => withinDays(p.createdAt, 7, now));
+  else if (period === 'month') items = items.filter((p) => withinDays(p.createdAt, 30, now));
+  if (sort === 'popular') items.sort((a, b) => b.likes - a.likes);
+  else items.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  return ok({ posts: items });
+}
+
+// GET /api/community/popular?period=week|month — 인기글 TOP
+export function popularCommunity(query) {
+  const period = query.period === 'month' ? 'month' : 'week';
+  const days = period === 'month' ? 30 : 7;
+  const now = Date.now();
+  const items = (db.all.community || [])
+    .filter((p) => withinDays(p.createdAt, days, now))
+    .sort((a, b) => b.likes - a.likes)
+    .slice(0, 5);
+  return ok({ period, posts: items });
+}
+
+// POST /api/community — 글/후기 작성
+export function createPost(body) {
+  const { type, title, body: text, author, facilityId, rating, category } = body || {};
+  if (!title || !text) return badReq('제목과 내용은 필수입니다');
+  const isReview = type === 'review';
+  const f = facilityId ? db.facility(facilityId) : null;
+  const post = {
+    id: makeId('c'),
+    type: isReview ? 'review' : 'post',
+    facilityId: f ? f.id : undefined,
+    facilityName: f ? f.name : undefined,
+    emoji: f ? f.emoji : '📝',
+    category: category || undefined,
+    title,
+    body: text,
+    author: author || '게스트',
+    rating: isReview ? Number(rating) || 5 : undefined,
+    likes: 0,
+    comments: 0,
+    createdAt: new Date().toISOString(),
+    tags: [],
+  };
+  db.update((s) => (s.community || (s.community = [])).unshift(post));
+  return created({ post });
+}
+
+// POST /api/community/:id/like
+export function likePost(id) {
+  const p = (db.all.community || []).find((x) => x.id === id);
+  if (!p) return notFound('글을 찾을 수 없습니다');
+  db.update(() => {
+    p.likes += 1;
+  });
+  return ok({ id, likes: p.likes });
+}
+
 // ---- Hub (플러그인) ----
 
 // GET /api/hub — 등록된 로컬 서비스 플러그인 목록

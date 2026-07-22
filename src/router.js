@@ -18,6 +18,8 @@ export function routeApi({ method, pathname, query = {}, body = {} }) {
     if (parts[1] === 'hub' && parts[2] && parts[3] === 'catalog') return api.hubCatalog(parts[2], query);
     if (pathname === '/api/passes') return api.listPasses(query);
     if (pathname === '/api/my') return api.getMy(query);
+    if (pathname === '/api/community/popular') return api.popularCommunity(query);
+    if (pathname === '/api/community') return api.listCommunity(query);
     if (parts[1] === 'partner' && parts[2] && parts[3] === 'dashboard') return api.partnerDashboard(parts[2]);
   }
 
@@ -28,6 +30,8 @@ export function routeApi({ method, pathname, query = {}, body = {} }) {
     if (pathname === '/api/partner/promotions') return api.createPromotion(body);
     if (parts[1] === 'partner' && parts[2] === 'promotions' && parts[3] && parts[4] === 'toggle')
       return api.togglePromotion(parts[3]);
+    if (pathname === '/api/community') return api.createPost(body);
+    if (parts[1] === 'community' && parts[2] && parts[3] === 'like') return api.likePost(parts[2]);
     if (parts[1] === 'hub' && parts[2] && parts[3]) return api.hubAction(parts[2], parts[3], body);
     if (pathname === '/api/dev/reset') {
       db.reset();

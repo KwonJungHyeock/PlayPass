@@ -717,5 +717,18 @@
   ],
   "passes": [],
   "hubBookings": [],
-  "crewMembers": []
+  "crewMembers": [],
+  "community": [
+    { "id": "c-001", "type": "review", "facilityId": "f-fit-01", "facilityName": "파워존 24시 헬스 전북대점", "emoji": "💪", "title": "가성비 진짜 미쳤다", "body": "학생 요금 45,000원에 24시간 이용 가능… 전북대생이면 무조건 여기. 머신도 신상이고 새벽에도 사람 있어서 안전해요. 별 다섯 개도 부족함 ⭐", "author": "헬린이민수", "rating": 5, "likes": 142, "comments": 23, "createdAt": "2026-07-21T09:12:00Z", "tags": ["가성비", "24시간"] },
+    { "id": "c-002", "type": "review", "facilityId": "f-run-01", "facilityName": "전주천 러닝크루 스테이션", "emoji": "🏃", "title": "전주천 러닝크루 강추 🏃", "body": "혼자 달리다 지쳤는데 크루 들어오니 페이스 잡아주고 완주하게 됨. 러닝화 대여도 되고 샤워실도 깨끗해요. 초보 페이스그룹 있어서 부담 없어요!", "author": "달리는소연", "rating": 5, "likes": 98, "comments": 15, "createdAt": "2026-07-20T22:40:00Z", "tags": ["러닝크루", "초보환영"] },
+    { "id": "c-003", "type": "post", "category": "running", "emoji": "🗺️", "title": "전주 러닝 코스 추천 (초보용 3곳)", "body": "1. 전주천 둔치 5K — 평지라 입문 최고\n2. 덕진공원 한바퀴 2K — 벚꽃철 강추\n3. 에코시티 순환 7K — 야경 예쁨\n다들 무리하지 말고 즐겁게 달려요 🙌", "author": "러닝왕", "likes": 210, "comments": 41, "createdAt": "2026-07-18T08:05:00Z", "tags": ["코스추천", "초보"] },
+    { "id": "c-004", "type": "post", "category": "futsal", "emoji": "⚽", "title": "오늘 저녁 풋살 같이 하실 분! (덕진)", "body": "덕진 풋살파크 8시 소셜매치 2자리 비어요. 초보 환영이고 끝나고 치맥 콜? 댓글 주세요~", "author": "풋살하자", "likes": 54, "comments": 33, "createdAt": "2026-07-19T11:20:00Z", "tags": ["번개", "모집"] },
+    { "id": "c-005", "type": "review", "facilityId": "f-hike-01", "facilityName": "모악산 트레킹 클럽", "emoji": "🥾", "title": "모악산 가이드 트레킹 만족", "body": "혼자 가기 무서웠는데 가이드님이 페이스 맞춰주고 사진도 찍어주심. 둘레길 코스는 4060분들도 많이 오세요. 정상 인증샷 최고 📸", "author": "산타는지훈", "rating": 5, "likes": 76, "comments": 9, "createdAt": "2026-07-16T15:30:00Z", "tags": ["등산", "가이드"] },
+    { "id": "c-006", "type": "post", "category": "diet", "emoji": "🔥", "title": "비빔핏으로 3개월 -8kg 감량 성공기", "body": "크로스핏 + 러닝크루 조합으로 84 → 76kg. 특가로 부담 없이 여러 종목 시도한 게 컸어요. 식단은 따로 안 하고 운동만! 다들 화이팅 💪🔥", "author": "다이어터정", "likes": 305, "comments": 62, "createdAt": "2026-07-14T19:00:00Z", "tags": ["다이어트", "후기"] },
+    { "id": "c-007", "type": "review", "facilityId": "f-jiu-01", "facilityName": "그래플러 주짓수 아카데미", "emoji": "🥋", "title": "여성부 3개월 후기", "body": "운동 1도 안 하던 사람인데 여성부라 편하게 시작. 관장님이 기본기 하나하나 봐주셔서 늘었어요. 호신술로도 자신감 생김!", "author": "그랭이", "rating": 5, "likes": 88, "comments": 12, "createdAt": "2026-07-12T13:10:00Z", "tags": ["여성부", "초보"] },
+    { "id": "c-008", "type": "post", "category": "cycling", "emoji": "🚴", "title": "에코시티 자전거길 라이딩 후기 📸", "body": "송천 에코시티 자전거길 주말 라이딩 다녀왔어요. 노을 지는 시간대가 진짜 예술… 대여 자전거도 상태 좋았음. 초보 라이딩 그룹 추천!", "author": "바람이", "likes": 120, "comments": 18, "createdAt": "2026-07-05T18:45:00Z", "tags": ["라이딩", "야경"] },
+    { "id": "c-009", "type": "review", "facilityId": "f-yoga-01", "facilityName": "하루요가 스튜디오 에코시티", "emoji": "🧘", "title": "퇴근 후 요가 = 힐링 그자체", "body": "10인 이하 소수정원이라 선생님이 자세 다 봐주세요. 하루 스트레스가 싹 풀림. 3040 직장인들께 강추드려요 🧘‍♀️", "author": "요가맘", "rating": 5, "likes": 45, "comments": 6, "createdAt": "2026-07-02T21:30:00Z", "tags": ["힐링", "퇴근후"] },
+    { "id": "c-010", "type": "review", "facilityId": "f-futsal-01", "facilityName": "전주 풋살파크 덕진", "emoji": "⚽", "title": "소셜매치 혼자 가도 재밌어요", "body": "친구 없이 혼자 갔는데 매니저님이 팀 짜주셔서 금방 어울림. 인조잔디 좋고 야간 조명도 밝아요. 운동 부족한 직장인들 강추!", "author": "축구초보", "rating": 4, "likes": 39, "comments": 7, "createdAt": "2026-06-28T12:00:00Z", "tags": ["소셜매치", "야간"] },
+    { "id": "c-011", "type": "post", "category": "hiking", "emoji": "🌄", "title": "모악산 일출 실화냐...", "body": "새벽 4시에 올라가서 본 일출. 힘들었지만 이 맛에 등산하나 봐요. 사진 첨부 못 하는 게 아쉬움. 다음엔 같이 가실 분 모집할게요!", "author": "새벽등산", "likes": 71, "comments": 14, "createdAt": "2026-06-20T05:20:00Z", "tags": ["등산", "일출"] }
+  ]
 }

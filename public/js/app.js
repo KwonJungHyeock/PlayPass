@@ -68,6 +68,7 @@ function showTab(name) {
   if (name === 'explore') loadFacilities();
   if (name === 'hub') loadHub();
   if (name === 'my') renderMy();
+  if (name === 'community') renderCommunity();
 }
 
 // ---------- Location (zone picker sheet) ----------
@@ -429,6 +430,149 @@ async function renderMy() {
   });
 }
 
+// ---------- Community ----------
+const cmState = { tab: 'all', period: 'week' };
+
+function timeAgo(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 60) return `${Math.max(1, m)}분 전`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}시간 전`;
+  const d = Math.floor(h / 24);
+  return d < 7 ? `${d}일 전` : `${Math.floor(d / 7)}주 전`;
+}
+function stars(n) {
+  return '★'.repeat(n) + '☆'.repeat(5 - n);
+}
+
+function postCard(p, rank) {
+  const badge = p.type === 'review'
+    ? `<span class="cm-tag review">⭐ 후기</span>`
+    : `<span class="cm-tag post">✍️ 자유글</span>`;
+  const ref = p.facilityName ? `<span class="cm-ref">📍 ${p.facilityName}</span>` : '';
+  const rk = rank ? `<span class="cm-rank ${rank <= 3 ? 'top' : ''}">${rank}</span>` : '';
+  return `
+    <button class="cm-card" data-id="${p.id}">
+      ${rk}
+      <div class="cm-cbody">
+        <div class="cm-crow">${badge}${p.type === 'review' ? `<span class="cm-stars">${stars(p.rating || 5)}</span>` : ''}</div>
+        <div class="cm-title">${p.title}</div>
+        <div class="cm-snip">${p.body.split('\n')[0]}</div>
+        <div class="cm-meta">${ref}<span>🧡 ${p.likes}</span><span>💬 ${p.comments}</span><span>${p.author} · ${timeAgo(p.createdAt)}</span></div>
+      </div>
+    </button>`;
+}
+
+async function loadHomePopular() {
+  const { posts } = await api('/api/community/popular?period=week');
+  $('#homePopList').innerHTML = posts
+    .slice(0, 3)
+    .map((p, i) => postCard(p, i + 1))
+    .join('');
+  bindPostCards($('#homePopList'));
+}
+
+async function renderCommunity() {
+  const pop = await api('/api/community/popular?period=' + cmState.period);
+  $('#cmPopList').innerHTML = pop.posts.map((p, i) => postCard(p, i + 1)).join('');
+  bindPostCards($('#cmPopList'));
+
+  const { posts } = await api('/api/community?tab=' + cmState.tab + '&sort=recent');
+  $('#cmList').innerHTML = posts.length
+    ? posts.map((p) => postCard(p)).join('')
+    : `<div class="empty"><div class="big">🥣</div>아직 글이 없어요.<br>첫 글의 주인공이 되어보세요!</div>`;
+  bindPostCards($('#cmList'));
+}
+
+function bindPostCards(root) {
+  root.querySelectorAll('.cm-card').forEach((el) => el.addEventListener('click', () => openPost(el.dataset.id)));
+}
+
+async function openPost(id) {
+  const { posts } = await api('/api/community');
+  const p = posts.find((x) => x.id === id);
+  if (!p) return;
+  const ref = p.facilityName
+    ? `<button class="cm-refbtn" data-fac="${p.facilityId}">📍 ${p.facilityName} 보러가기 ›</button>`
+    : '';
+  openSheet(`
+    <div class="sheet-body">
+      <div class="cm-crow" style="margin-bottom:8px">
+        ${p.type === 'review' ? `<span class="cm-tag review">⭐ 후기</span><span class="cm-stars">${stars(p.rating || 5)}</span>` : `<span class="cm-tag post">✍️ 자유글</span>`}
+      </div>
+      <h1>${p.title}</h1>
+      <div class="cm-meta" style="margin:6px 0 16px">${p.author} · ${timeAgo(p.createdAt)} · 🧡 <span id="likeCount">${p.likes}</span></div>
+      ${ref}
+      <p style="white-space:pre-line;font-size:15px;color:var(--sub);line-height:1.7;margin-top:14px">${p.body}</p>
+      <button class="like-btn" id="likeBtn">🧡 좋아요 <b id="likeCount2">${p.likes}</b></button>
+    </div>`);
+  $('#likeBtn').addEventListener('click', async () => {
+    const r = await api('/api/community/' + id + '/like', { method: 'POST' });
+    if (r.likes != null) {
+      $('#likeCount').textContent = r.likes;
+      $('#likeCount2').textContent = r.likes;
+      $('#likeBtn').classList.add('liked');
+      toast('🧡 좋아요!');
+    }
+  });
+  const rb = $('#sheet').querySelector('.cm-refbtn');
+  if (rb) rb.addEventListener('click', () => { closeSheet(); openDetail(rb.dataset.fac); });
+}
+
+function openWrite() {
+  openSheet(`
+    <div class="sheet-body">
+      <h1 style="margin-bottom:16px">✏️ 글쓰기</h1>
+      <div class="seg" id="wType" style="margin-bottom:14px">
+        <button data-t="post" class="on">✍️ 자유글</button>
+        <button data-t="review">⭐ 업체후기</button>
+      </div>
+      <div id="wFacWrap" style="display:none;margin-bottom:12px">
+        <select id="wFac" class="w-input"></select>
+        <div id="wStars" class="w-stars">${[1,2,3,4,5].map((n)=>`<button data-s="${n}" class="on">★</button>`).join('')}</div>
+      </div>
+      <input id="wTitle" class="w-input" placeholder="제목" style="margin-bottom:10px" />
+      <textarea id="wBody" class="w-input" rows="6" placeholder="내용을 입력하세요 :)" style="margin-bottom:14px"></textarea>
+      <button class="like-btn solid" id="wSubmit">등록하기</button>
+    </div>`, 'auto');
+
+  let wType = 'post', wRating = 5;
+  // 후기용 시설 목록 로드(1회 캐시)
+  const fillFacs = (facs) => {
+    $('#wFac').innerHTML = facs.map((f) => `<option value="${f.id}">${f.emoji} ${f.name}</option>`).join('');
+  };
+  if (state._facs) fillFacs(state._facs);
+  else api('/api/facilities').then(({ facilities }) => { state._facs = facilities; fillFacs(facilities); });
+  $('#wType').querySelectorAll('button').forEach((b) =>
+    b.addEventListener('click', () => {
+      wType = b.dataset.t;
+      $('#wType').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
+      $('#wFacWrap').style.display = wType === 'review' ? 'block' : 'none';
+    }),
+  );
+  $('#wStars').querySelectorAll('button').forEach((b) =>
+    b.addEventListener('click', () => {
+      wRating = +b.dataset.s;
+      $('#wStars').querySelectorAll('button').forEach((x) => x.classList.toggle('on', +x.dataset.s <= wRating));
+    }),
+  );
+  $('#wSubmit').addEventListener('click', async () => {
+    const title = $('#wTitle').value.trim();
+    const body = $('#wBody').value.trim();
+    if (!title || !body) return toast('제목과 내용을 입력하세요');
+    const author = ensureUser();
+    const payload = { type: wType, title, body, author };
+    if (wType === 'review') { payload.facilityId = $('#wFac').value; payload.rating = wRating; }
+    const r = await api('/api/community', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+    if (r.error) return toast('⚠ ' + r.error);
+    closeSheet();
+    toast('✅ 글이 등록되었어요!');
+    renderCommunity();
+    loadHomePopular();
+  });
+}
+
 // ---------- Init ----------
 async function init() {
   state.meta = await api('/api/meta');
@@ -439,6 +583,24 @@ async function init() {
   loadDeals();
   loadReco();
   loadHubShortcut();
+  loadHomePopular();
+
+  // 커뮤니티 컨트롤
+  $('#cmWrite').addEventListener('click', openWrite);
+  $('#cmSeg').querySelectorAll('button').forEach((b) =>
+    b.addEventListener('click', () => {
+      cmState.tab = b.dataset.tab;
+      $('#cmSeg').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
+      renderCommunity();
+    }),
+  );
+  $('#cmPeriod').querySelectorAll('button').forEach((b) =>
+    b.addEventListener('click', () => {
+      cmState.period = b.dataset.p;
+      $('#cmPeriod').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
+      renderCommunity();
+    }),
+  );
 
   document.querySelectorAll('.tabbar .tab').forEach((t) => t.addEventListener('click', () => showTab(t.dataset.tab)));
   document.querySelectorAll('[data-goto]').forEach((el) => el.addEventListener('click', () => showTab(el.dataset.goto)));
